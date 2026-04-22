@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const APP_STORE_URL = "https://apps.apple.com/app/id6743557889";
 
@@ -28,9 +29,7 @@ export default function Nav() {
       <div className="max-w-5xl mx-auto px-6 h-[60px] flex items-center justify-between">
         {/* Logo */}
         <a href="/" className="flex items-center gap-2.5 group">
-          <div className="w-7 h-7 rounded-[7px] bg-[#0a84ff]/20 border border-[#0a84ff]/30 flex items-center justify-center text-[#0a84ff] text-xs font-semibold font-jura">
-            N
-          </div>
+          <Image src="/images/icon.png" alt="N0te" width={32} height={32} className="w-8 h-8" />
           <span className="text-[15px] font-semibold text-white/90 font-jura tracking-tight">
             N0te
           </span>

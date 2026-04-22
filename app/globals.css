@@ -1,26 +1,51 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: #0d1117;
+  --color-surface: rgba(20, 26, 32, 0.85);
+  --color-fg: #f0f4ff;
+  --color-muted: rgba(240, 244, 255, 0.48);
+  --color-accent: #0a84ff;
+  --color-border: rgba(255, 255, 255, 0.12);
+  --font-jura: var(--font-jura);
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --ease-out-expo: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+html {
+  background: #0d1117;
+  color: #f0f4ff;
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #0d1117;
+  color: #f0f4ff;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Smooth scroll offset for sticky nav */
+[id] {
+  scroll-margin-top: 80px;
+}
+
+/* Glass surface utility */
+.glass {
+  background: rgba(20, 26, 32, 0.72);
+  backdrop-filter: blur(24px) saturate(1.4);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    inset 0 1px 0 rgba(200, 220, 255, 0.08),
+    0 0 0 0.5px rgba(255, 255, 255, 0.06),
+    0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Jura font for headlines */
+.font-jura {
+  font-family: var(--font-jura), "Jura", sans-serif;
 }

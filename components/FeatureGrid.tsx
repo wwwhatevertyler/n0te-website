@@ -16,7 +16,7 @@ const features = [
         <path d="M5 8h10M5 11h7" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
       </svg>
     ),
-    accent: "#0a84ff",
+    accent: "#8e8e93",
   },
   {
     title: "Voice dictation",
@@ -28,7 +28,7 @@ const features = [
         <path d="M4 10a6 6 0 0012 0M10 16v2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
       </svg>
     ),
-    accent: "#30d158",
+    accent: "#8e8e93",
   },
   {
     title: "Obsidian export",
@@ -40,7 +40,7 @@ const features = [
         <path d="M10 3v14M3 7l7 4 7-4" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
       </svg>
     ),
-    accent: "#bf5af2",
+    accent: "#8e8e93",
   },
   {
     title: "Multi-note",
@@ -52,7 +52,7 @@ const features = [
         <rect x="6" y="2" width="12" height="10" rx="3" stroke="currentColor" strokeWidth="1.4" strokeDasharray="2 1.5" />
       </svg>
     ),
-    accent: "#ff9f0a",
+    accent: "#8e8e93",
   },
   {
     title: "Image attachments",
@@ -65,7 +65,7 @@ const features = [
         <path d="M2 13l4-3 3 3 3-4 4 4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
-    accent: "#ff375f",
+    accent: "#8e8e93",
   },
   {
     title: "Fully local",
@@ -77,7 +77,7 @@ const features = [
         <circle cx="10" cy="7" r="2" stroke="currentColor" strokeWidth="1.2" />
       </svg>
     ),
-    accent: "#64d2ff",
+    accent: "#8e8e93",
   },
 ];
 

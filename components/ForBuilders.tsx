@@ -123,7 +123,7 @@ export default function ForBuilders() {
               initial={{ opacity: 0, y: 8 }}
               animate={builderInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.06, duration: 0.4, ease }}
-              className="text-[11px] font-medium text-[#0a84ff]/45 uppercase tracking-widest mb-5"
+              className="text-[11px] font-medium text-white/30 uppercase tracking-widest mb-5"
             >
               For builders
             </motion.p>

@@ -112,7 +112,7 @@ export default function StayInFlow() {
                 border: "1px solid rgba(48,209,88,0.14)",
               }}
             >
-              <p className="text-[11px] font-medium text-[#30d158]/55 uppercase tracking-widest mb-4">
+              <p className="text-[11px] font-medium text-white/30 uppercase tracking-widest mb-4">
                 With N0te
               </p>
               <div className="space-y-2.5">
@@ -122,8 +122,8 @@ export default function StayInFlow() {
                   "Keep going",
                 ].map((step, i) => (
                   <div key={i} className="flex items-center gap-3">
-                    <div className="w-5 h-5 rounded-full bg-[#30d158]/10 border border-[#30d158]/25 flex items-center justify-center shrink-0">
-                      <span className="text-[9px] text-[#30d158]/70">{i + 1}</span>
+                    <div className="w-5 h-5 rounded-full bg-white/[0.06] border border-white/[0.10] flex items-center justify-center shrink-0">
+                      <span className="text-[9px] text-white/40">{i + 1}</span>
                     </div>
                     <span className="text-[13px] text-white/70">{step}</span>
                   </div>

@@ -122,7 +122,7 @@ export default function Pricing() {
                       />
                       <path
                         d="M4.5 7l2 2 3-3"
-                        stroke="#30d158"
+                        stroke="rgba(255,255,255,0.45)"
                         strokeWidth="1.2"
                         strokeLinecap="round"
                         strokeLinejoin="round"

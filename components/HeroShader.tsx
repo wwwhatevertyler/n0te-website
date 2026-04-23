@@ -6,11 +6,11 @@ export default function HeroShader({ className }: { className?: string }) {
   return (
     <MeshGradient
       className={className}
-      colors={["#000000", "#111111", "#2a2a2a", "#c8c8c8", "#ffffff"]}
-      speed={0.55}
-      distortion={0.45}
-      swirl={0.3}
-      grainOverlay={0.04}
+      colors={["#000000", "#1a1a1a", "#333333", "#ffffff"]}
+      speed={1.0}
+      distortion={0.8}
+      swirl={0.1}
+      grainOverlay={0.0}
     />
   );
 }

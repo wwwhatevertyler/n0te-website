@@ -53,7 +53,7 @@ export default function ObsidianVault() {
               </div>
               {/* Markdown content */}
               <div className="p-6 font-mono text-[13px] leading-relaxed">
-                <p className="text-[#0a84ff]/80"># landing page notes</p>
+                <p className="text-white/55"># landing page notes</p>
                 <div className="h-3" />
                 <p className="text-white/55">
                   Send Obsidian export path into hero.

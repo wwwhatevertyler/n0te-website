@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import HeroShader from "./HeroShader";
 import HeroNoteReplica from "./HeroNoteReplica";
 import Magnetic from "@/components/Magnetic";
 import { EASE_OUT_SOFT, PRESS_TRANSITION } from "@/lib/motion";
@@ -30,16 +29,6 @@ const heroItem = {
 export default function Hero() {
   return (
     <section className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-6 pb-10 pt-10">
-      {/* Shader — full section background */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.6, ease: EASE_OUT_SOFT }}
-        className="absolute inset-0 pointer-events-none"
-      >
-        <HeroShader className="w-full h-full" />
-      </motion.div>
-
       {/* Gradient overlay */}
       <div
         className="absolute inset-0 pointer-events-none"

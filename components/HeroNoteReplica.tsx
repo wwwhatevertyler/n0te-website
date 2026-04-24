@@ -2,6 +2,7 @@
 
 import type { CSSProperties, ReactNode } from "react";
 import { motion } from "framer-motion";
+import HeroShader from "@/components/HeroShader";
 import Magnetic from "@/components/Magnetic";
 import { EASE_OUT_SOFT } from "@/lib/motion";
 import { type SiteTheme, useSiteTheme } from "@/components/SiteThemeProvider";
@@ -186,7 +187,21 @@ export default function HeroNoteReplica() {
           "drop-shadow(0 24px 58px rgba(0,0,0,0.50)) drop-shadow(0 6px 18px rgba(0,0,0,0.36))",
       }}
     >
-      <div className="relative overflow-hidden" style={noteFrameStyle}>
+      <div
+        className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[260px] w-[420px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[54px] opacity-70 blur-[2px]"
+        aria-hidden="true"
+      >
+        <HeroShader className="h-full w-full scale-125" />
+      </div>
+      <div
+        className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[230px] w-[370px] -translate-x-1/2 -translate-y-1/2 rounded-[48px]"
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 50%, color-mix(in srgb, var(--theme-page) 0%, transparent) 0%, color-mix(in srgb, var(--theme-page) 30%, transparent) 48%, var(--theme-page) 82%)",
+        }}
+        aria-hidden="true"
+      />
+      <div className="relative z-10 overflow-hidden" style={noteFrameStyle}>
         <div
           className="pointer-events-none absolute inset-0"
           style={{

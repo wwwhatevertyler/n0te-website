@@ -22,6 +22,7 @@
 - [x] Added Framer Motion magnetic pull to primary CTAs and the hero note theme toggle.
 - [x] Changed the hero note theme toggle to one full-pill magnetic/clickable control.
 - [x] Tightened Lenis and shader runtime settings to reduce fast-scroll freezes.
+- [x] Normalized divider-led section spacing so dividers sit between equal vertical gaps.
 
 ## Verification
 - `./node_modules/.bin/tsc --noEmit`
@@ -49,6 +50,9 @@
 - Tuned Lenis to shorter lerp-based smoothing, clamped large wheel deltas, paused the hero shader offscreen, then re-ran `./node_modules/.bin/tsc --noEmit`.
 - Re-ran `npm run build` after the fast-scroll performance pass.
 - Opened `http://127.0.0.1:3000`; Next logged `GET / 200`.
+- Normalized divider section rhythm and re-ran `./node_modules/.bin/tsc --noEmit`.
+- Re-ran `npm run build` after the divider spacing pass.
+- Opened `http://127.0.0.1:3000/#reviews`; Next logged `GET / 200`.
 
 ## Result
 - Lenis is mounted globally with reduced-motion handling and anchor support.
@@ -63,3 +67,4 @@
 - Nav and footer brand marks now share the 24px small-icon size, and CTA/toggle controls have mouse-only magnetic pull with reduced-motion and touch safeguards.
 - Hero note theme toggle now moves as one magnetic pill and toggles the site theme from the full control surface.
 - Fast-scroll behavior should no longer backlog as heavily because Lenis uses tighter damping and the animated hero shader stops when offscreen or reduced motion is active.
+- Divider-led sections now remove extra top padding before the line and use the same 112px rhythm above and below each divider.

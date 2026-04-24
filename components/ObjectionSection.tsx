@@ -100,7 +100,7 @@ export default function ObjectionSection() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="faq" className="relative py-28 px-6">
+    <section id="faq" className="relative px-6 pb-28">
       <div className="max-w-5xl mx-auto">
         {/* Divider */}
         <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-28" />

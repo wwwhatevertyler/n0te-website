@@ -55,7 +55,7 @@ const builderTags = [
 
 export default function ForBuilders() {
   return (
-    <section className="relative py-28 px-6">
+    <section className="relative px-6 pb-28">
       <div className="max-w-5xl mx-auto">
         <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-28" />
 

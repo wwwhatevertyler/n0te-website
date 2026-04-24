@@ -78,8 +78,8 @@ function Stars() {
 
 export default function Reviews() {
   return (
-    <section id="reviews" className="relative py-28 px-6">
-      <div className="max-w-5xl mx-auto mb-20">
+    <section id="reviews" className="relative px-6 pb-28">
+      <div className="max-w-5xl mx-auto mb-28">
         <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       </div>
 

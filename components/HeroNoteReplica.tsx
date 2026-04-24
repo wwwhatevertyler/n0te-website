@@ -2,6 +2,7 @@
 
 import type { CSSProperties, ReactNode } from "react";
 import { motion } from "framer-motion";
+import Magnetic from "@/components/Magnetic";
 import { EASE_OUT_SOFT } from "@/lib/motion";
 import { type SiteTheme, useSiteTheme } from "@/components/SiteThemeProvider";
 
@@ -101,46 +102,50 @@ function ThemeToggle() {
         boxShadow: "inset 0 1px 0 var(--note-control-highlight)",
       }}
     >
-      <button
-        type="button"
-        aria-pressed={theme === "light"}
-        aria-label="Switch website to light mode"
-        className="grid h-5 w-[26px] place-items-center rounded-full transition duration-150"
-        onClick={() => switchTheme("light")}
-        style={{
-          background: theme === "light" ? "var(--note-toggle-active)" : "transparent",
-          color: theme === "light" ? "var(--note-toggle-active-icon)" : "var(--note-toggle-icon)",
-        }}
-      >
-        <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-          <circle cx="6" cy="6" r="2" fill="currentColor" />
-          <path
-            d="M6 1.4v1.2M6 9.4v1.2M1.4 6h1.2M9.4 6h1.2M2.75 2.75l.85.85M8.4 8.4l.85.85M9.25 2.75l-.85.85M3.6 8.4l-.85.85"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeWidth="0.9"
-          />
-        </svg>
-      </button>
+      <Magnetic maxOffset={3.5} influence={0.22}>
+        <button
+          type="button"
+          aria-pressed={theme === "light"}
+          aria-label="Switch website to light mode"
+          className="grid h-5 w-[26px] place-items-center rounded-full transition duration-150"
+          onClick={() => switchTheme("light")}
+          style={{
+            background: theme === "light" ? "var(--note-toggle-active)" : "transparent",
+            color: theme === "light" ? "var(--note-toggle-active-icon)" : "var(--note-toggle-icon)",
+          }}
+        >
+          <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <circle cx="6" cy="6" r="2" fill="currentColor" />
+            <path
+              d="M6 1.4v1.2M6 9.4v1.2M1.4 6h1.2M9.4 6h1.2M2.75 2.75l.85.85M8.4 8.4l.85.85M9.25 2.75l-.85.85M3.6 8.4l-.85.85"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="0.9"
+            />
+          </svg>
+        </button>
+      </Magnetic>
 
-      <button
-        type="button"
-        aria-pressed={theme === "dark"}
-        aria-label="Switch website to dark mode"
-        className="grid h-5 w-[26px] place-items-center rounded-full transition duration-150"
-        onClick={() => switchTheme("dark")}
-        style={{
-          background: theme === "dark" ? "var(--note-toggle-active)" : "transparent",
-          color: theme === "dark" ? "var(--note-toggle-active-icon)" : "var(--note-toggle-icon)",
-        }}
-      >
-        <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-          <path
-            d="M9.9 7.2A4.45 4.45 0 0 1 4.8 2.1a4.7 4.7 0 1 0 5.1 5.1Z"
-            fill="currentColor"
-          />
-        </svg>
-      </button>
+      <Magnetic maxOffset={3.5} influence={0.22}>
+        <button
+          type="button"
+          aria-pressed={theme === "dark"}
+          aria-label="Switch website to dark mode"
+          className="grid h-5 w-[26px] place-items-center rounded-full transition duration-150"
+          onClick={() => switchTheme("dark")}
+          style={{
+            background: theme === "dark" ? "var(--note-toggle-active)" : "transparent",
+            color: theme === "dark" ? "var(--note-toggle-active-icon)" : "var(--note-toggle-icon)",
+          }}
+        >
+          <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path
+              d="M9.9 7.2A4.45 4.45 0 0 1 4.8 2.1a4.7 4.7 0 1 0 5.1 5.1Z"
+              fill="currentColor"
+            />
+          </svg>
+        </button>
+      </Magnetic>
     </div>
   );
 }

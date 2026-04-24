@@ -10,7 +10,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="flex flex-col gap-3 max-w-[200px]">
             <div className="flex items-center gap-2">
-              <Image src="/images/icon.png" alt="N0te" width={32} height={32} className="w-8 h-8" />
+              <Image src="/images/icon.png" alt="N0te" width={24} height={24} className="h-6 w-6" />
               <span className="text-[15px] font-semibold text-white/90 font-jura">N0te</span>
             </div>
             <p className="text-[12px] text-white/30 leading-relaxed">

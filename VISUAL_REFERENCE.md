@@ -138,3 +138,5 @@ If a website visual decision is unclear, default to:
 - real product imagery over decorative abstraction
 - dark premium Mac utility tone
 - one strong hero moment over many equal visual ideas
+
+Small website UI should sit on a 4px micro-grid. Use `24px` as the default size for compact brand marks and small circular controls so website chrome stays aligned with the native note control metrics.

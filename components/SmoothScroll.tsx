@@ -15,14 +15,23 @@ function SmoothScrollRoot({ children }: { children: ReactNode }) {
 
     const lenis = new Lenis({
       autoRaf: true,
-      duration: 1.05,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      lerp: 0.16,
       smoothWheel: true,
-      wheelMultiplier: 0.92,
-      overscroll: true,
+      wheelMultiplier: 0.82,
+      overscroll: false,
+      virtualScroll: (event) => {
+        const maxDelta = 140;
+        const deltaY = event.deltaY;
+
+        if (Math.abs(deltaY) > maxDelta) {
+          event.deltaY = Math.sign(deltaY) * maxDelta;
+        }
+
+        return true;
+      },
       anchors: {
         offset: -88,
-        duration: 0.8,
+        duration: 0.58,
       },
     });
 

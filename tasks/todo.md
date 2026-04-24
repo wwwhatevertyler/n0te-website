@@ -14,7 +14,8 @@
 - [x] Synced the web-facing note replica constants into `VISUAL_REFERENCE.md`.
 - [x] Marked the fixed nav logo as eager-loaded after Next flagged it as the LCP image.
 - [x] Added site-wide light/dark theme state controlled by the hero note toggle.
-- [x] Added persisted theme choice, pre-hydration theme boot script, and radial theme wash transition.
+- [x] Added persisted theme choice and pre-hydration theme boot script.
+- [x] Removed the radial theme wash so hero-note theme changes happen instantly.
 
 ## Verification
 - `./node_modules/.bin/tsc --noEmit`
@@ -29,6 +30,8 @@
 - Added hero-note theme toggle pass and re-ran `./node_modules/.bin/tsc --noEmit`.
 - Added hero-note theme toggle pass and re-ran `npm run build`.
 - Local dev page opened at `http://127.0.0.1:3000`; Next logged `GET / 200`.
+- Changed the hero-note theme toggle to an instant swap and re-ran `./node_modules/.bin/tsc --noEmit`.
+- Changed the hero-note theme toggle to an instant swap and re-ran `npm run build`.
 
 ## Result
 - Lenis is mounted globally with reduced-motion handling and anchor support.
@@ -37,4 +40,4 @@
 - Obsidian Markdown preview card was restyled to match the quieter Finder-style card treatment.
 - Hero badge restored to Free + Obsidian copy, hard-coded purple accents moved to shared system-accent tokens, and the hero note preview was rebuilt against native app metrics.
 - Native app replica spec now exists at `/Users/whatevertyler/N0te/docs/web-note-replica-spec.md`; website summary points to it from `VISUAL_REFERENCE.md`.
-- Hero note light/dark toggle now controls the website theme and remembers the selected mode.
+- Hero note light/dark toggle now controls the website theme instantly and remembers the selected mode.

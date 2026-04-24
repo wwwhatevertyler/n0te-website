@@ -1,7 +1,6 @@
 "use client";
 
 import type { CSSProperties, ReactNode } from "react";
-import { useRef } from "react";
 import { motion } from "framer-motion";
 import { EASE_OUT_SOFT } from "@/lib/motion";
 import { type SiteTheme, useSiteTheme } from "@/components/SiteThemeProvider";
@@ -85,15 +84,13 @@ function MicIcon() {
 
 function ThemeToggle() {
   const { theme, setTheme } = useSiteTheme();
-  const toggleRef = useRef<HTMLDivElement>(null);
 
   function switchTheme(nextTheme: SiteTheme) {
-    setTheme(nextTheme, toggleRef.current);
+    setTheme(nextTheme);
   }
 
   return (
     <div
-      ref={toggleRef}
       className="flex items-center rounded-full"
       style={{
         width: 58,

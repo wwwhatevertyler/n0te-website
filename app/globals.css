@@ -35,8 +35,6 @@
   --theme-cta-bg: #f7f8fb;
   --theme-cta-fg: #0d1117;
   --theme-cta-bg-hover: rgba(247, 248, 251, 0.9);
-  --theme-origin-x: 50vw;
-  --theme-origin-y: 38vh;
   --note-surface: linear-gradient(180deg, rgba(43,44,44,0.54) 0%, rgba(30,31,31,0.42) 100%);
   --note-border: rgba(255,255,255,0.16);
   --note-shadow: inset 0 1px 0 rgba(255,255,255,0.10), inset 0 -1px 0 rgba(0,0,0,0.22), 0 0 0 0.5px rgba(255,255,255,0.04);
@@ -95,9 +93,6 @@ html {
   color: var(--theme-ink);
   overscroll-behavior-y: none;
   scroll-padding-top: 88px;
-  transition:
-    background-color 420ms var(--ease-out),
-    color 420ms var(--ease-out);
 }
 
 body {
@@ -108,9 +103,6 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: clip;
-  transition:
-    background-color 420ms var(--ease-out),
-    color 420ms var(--ease-out);
 }
 
 html.lenis,
@@ -165,8 +157,4 @@ button {
     scroll-padding-top: 80px;
   }
 
-  html,
-  body {
-    transition: none;
-  }
 }

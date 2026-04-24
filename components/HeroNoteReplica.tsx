@@ -86,29 +86,29 @@ function MicIcon() {
 function ThemeToggle() {
   const { theme, setTheme } = useSiteTheme();
 
-  function switchTheme(nextTheme: SiteTheme) {
-    setTheme(nextTheme);
+  function switchTheme(nextTheme?: SiteTheme) {
+    setTheme(nextTheme ?? (theme === "dark" ? "light" : "dark"));
   }
 
   return (
-    <div
-      className="flex items-center rounded-full"
-      style={{
-        width: 58,
-        height: 24,
-        padding: "0 3px",
-        background: "var(--note-control-fill)",
-        border: "0.5px solid var(--note-control-border)",
-        boxShadow: "inset 0 1px 0 var(--note-control-highlight)",
-      }}
-    >
-      <Magnetic maxOffset={3.5} influence={0.22}>
-        <button
-          type="button"
-          aria-pressed={theme === "light"}
-          aria-label="Switch website to light mode"
+    <Magnetic maxOffset={3.5} influence={0.14}>
+      <button
+        type="button"
+        aria-label={theme === "dark" ? "Switch website to light mode" : "Switch website to dark mode"}
+        aria-pressed={theme === "light"}
+        className="flex items-center rounded-full"
+        onClick={() => switchTheme()}
+        style={{
+          width: 58,
+          height: 24,
+          padding: "0 3px",
+          background: "var(--note-control-fill)",
+          border: "0.5px solid var(--note-control-border)",
+          boxShadow: "inset 0 1px 0 var(--note-control-highlight)",
+        }}
+      >
+        <span
           className="grid h-5 w-[26px] place-items-center rounded-full transition duration-150"
-          onClick={() => switchTheme("light")}
           style={{
             background: theme === "light" ? "var(--note-toggle-active)" : "transparent",
             color: theme === "light" ? "var(--note-toggle-active-icon)" : "var(--note-toggle-icon)",
@@ -123,16 +123,10 @@ function ThemeToggle() {
               strokeWidth="0.9"
             />
           </svg>
-        </button>
-      </Magnetic>
+        </span>
 
-      <Magnetic maxOffset={3.5} influence={0.22}>
-        <button
-          type="button"
-          aria-pressed={theme === "dark"}
-          aria-label="Switch website to dark mode"
+        <span
           className="grid h-5 w-[26px] place-items-center rounded-full transition duration-150"
-          onClick={() => switchTheme("dark")}
           style={{
             background: theme === "dark" ? "var(--note-toggle-active)" : "transparent",
             color: theme === "dark" ? "var(--note-toggle-active-icon)" : "var(--note-toggle-icon)",
@@ -144,9 +138,9 @@ function ThemeToggle() {
               fill="currentColor"
             />
           </svg>
-        </button>
-      </Magnetic>
-    </div>
+        </span>
+      </button>
+    </Magnetic>
   );
 }
 

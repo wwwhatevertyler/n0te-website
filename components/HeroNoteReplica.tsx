@@ -3,6 +3,7 @@
 import type { CSSProperties, ReactNode } from "react";
 import { motion } from "framer-motion";
 import Magnetic from "@/components/Magnetic";
+import HeroShader from "@/components/HeroShader";
 import { EASE_OUT_SOFT } from "@/lib/motion";
 import { type SiteTheme, useSiteTheme } from "@/components/SiteThemeProvider";
 
@@ -183,6 +184,13 @@ export default function HeroNoteReplica() {
       className="group relative select-none"
     >
       <div className="relative overflow-hidden" style={noteFrameStyle}>
+        <HeroShader
+          className="pointer-events-none absolute inset-0"
+          style={{
+            opacity: 0.58,
+          }}
+        />
+
         <div
           className="pointer-events-none absolute inset-0"
           style={{

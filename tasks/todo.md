@@ -27,6 +27,7 @@
 - [x] Moved the hero shader from the full hero background to a localized glow behind the note preview.
 - [x] Removed the localized shader/glow so the hero shows only the actual note preview.
 - [x] Removed the remaining external note preview drop-shadow and restored shader speed to the original fast value.
+- [x] Re-mounted the hero shader inside the note frame so it is clipped to the actual card.
 
 ## Verification
 - `./node_modules/.bin/tsc --noEmit`
@@ -65,6 +66,7 @@
 - Removed localized note shader/glow and re-ran `./node_modules/.bin/tsc --noEmit`.
 - Re-ran `npm run build` after removing the note shader/glow.
 - Removed the external note wrapper shadow and restored shader speed to `1.0`.
+- Re-mounted the shader inside the clipped note card before re-running verification.
 
 ## Result
 - Lenis is mounted globally with reduced-motion handling and anchor support.
@@ -84,3 +86,4 @@
 - Hero shader is no longer a full-section background.
 - Hero now shows the note preview without any extra shader/glow space around it.
 - Hero note no longer renders a broad circular wrapper shadow, and shader animation speed is back to the original value when used.
+- The animated shader is visible only inside the hero note material, clipped by the card radius.

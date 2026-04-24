@@ -49,12 +49,12 @@ function ChromeButton({
 
 function CloseIcon() {
   return (
-    <svg width="34%" height="34%" viewBox="0 0 8 8" fill="none" aria-hidden="true">
+    <svg width="9" height="9" viewBox="0 0 9 9" fill="none" aria-hidden="true">
       <path
-        d="M1.45 1.45l5.1 5.1M6.55 1.45l-5.1 5.1"
+        d="M2.05 2.05l4.9 4.9M6.95 2.05l-4.9 4.9"
         stroke="currentColor"
         strokeLinecap="round"
-        strokeWidth="1.35"
+        strokeWidth="1.5"
       />
     </svg>
   );
@@ -62,13 +62,22 @@ function CloseIcon() {
 
 function MicIcon() {
   return (
-    <svg width="43%" height="43%" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-      <rect x="4.25" y="1.2" width="3.5" height="6" rx="1.75" fill="currentColor" />
+    <svg width="9" height="9" viewBox="0 0 9 9" fill="none" aria-hidden="true">
+      <rect
+        x="3.15"
+        y="0.65"
+        width="2.7"
+        height="4.85"
+        rx="1.35"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.12"
+      />
       <path
-        d="M2.7 6.25a3.3 3.3 0 0 0 6.6 0M6 9.55v1.15"
+        d="M1.95 4.78a2.55 2.55 0 0 0 5.1 0M4.5 7.35v1.05"
         stroke="currentColor"
         strokeLinecap="round"
-        strokeWidth="1.05"
+        strokeWidth="1.12"
       />
     </svg>
   );
@@ -132,12 +141,12 @@ function ObsidianExportIcon() {
 
 function PlusIcon() {
   return (
-    <svg width="42%" height="42%" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+    <svg width="9" height="9" viewBox="0 0 9 9" fill="none" aria-hidden="true">
       <path
-        d="M5 1.9v6.2M1.9 5h6.2"
+        d="M4.5 1.75v5.5M1.75 4.5h5.5"
         stroke="currentColor"
         strokeLinecap="round"
-        strokeWidth="1.25"
+        strokeWidth="1.5"
       />
     </svg>
   );
@@ -203,11 +212,11 @@ export default function HeroNoteReplica() {
           </div>
 
           <div
-            className="absolute left-1/2 grid -translate-x-1/2 place-items-center"
+            className="absolute inset-x-0 grid place-items-center"
             style={{
               bottom: 20,
               height: 24,
-              transform: "translateX(-50%) translateY(4px)",
+              transform: "translateY(4px)",
             }}
           >
             <div

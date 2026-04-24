@@ -36,7 +36,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${jura.variable} h-full antialiased`}>
-      <body className="min-h-full bg-[#111111] text-[#f0f4ff]">
+      <body suppressHydrationWarning className="min-h-full bg-[#111111] text-[#f0f4ff]">
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

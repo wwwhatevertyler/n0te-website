@@ -1,20 +1,20 @@
 "use client";
 
 import type { CSSProperties, ReactNode } from "react";
+import { useRef } from "react";
 import { motion } from "framer-motion";
 import { EASE_OUT_SOFT } from "@/lib/motion";
+import { type SiteTheme, useSiteTheme } from "@/components/SiteThemeProvider";
 
 const noteFrameStyle: CSSProperties = {
   width: 300,
   height: 208,
   borderRadius: 38,
-  background:
-    "linear-gradient(180deg, rgba(43,44,44,0.54) 0%, rgba(30,31,31,0.42) 100%)",
+  background: "var(--note-surface)",
   backdropFilter: "blur(58px) saturate(1.58) brightness(1.08) contrast(1.04)",
   WebkitBackdropFilter: "blur(58px) saturate(1.58) brightness(1.08) contrast(1.04)",
-  border: "0.7px solid rgba(255,255,255,0.16)",
-  boxShadow:
-    "inset 0 1px 0 rgba(255,255,255,0.10), inset 0 -1px 0 rgba(0,0,0,0.22), 0 0 0 0.5px rgba(255,255,255,0.04)",
+  border: "0.7px solid var(--note-border)",
+  boxShadow: "var(--note-shadow)",
 };
 
 function ChromeButton({
@@ -32,14 +32,14 @@ function ChromeButton({
         height: 24,
         background: active
           ? "color-mix(in srgb, var(--n0te-accent) 24%, transparent)"
-          : "rgba(255,255,255,0.08)",
+          : "var(--note-control-fill)",
         border: active
           ? "0.5px solid color-mix(in srgb, var(--n0te-accent) 42%, transparent)"
-          : "0.5px solid rgba(255,255,255,0.12)",
+          : "0.5px solid var(--note-control-border)",
         boxShadow: active
           ? "0 0 0 1px color-mix(in srgb, var(--n0te-accent) 12%, transparent), inset 0 1px 0 rgba(255,255,255,0.035)"
           : "inset 0 1px 0 rgba(255,255,255,0.035)",
-        color: active ? "var(--n0te-accent)" : "rgba(245,248,255,0.52)",
+        color: active ? "var(--n0te-accent)" : "var(--note-control-icon)",
       }}
     >
       {children}
@@ -84,41 +84,66 @@ function MicIcon() {
 }
 
 function ThemeToggle() {
+  const { theme, setTheme } = useSiteTheme();
+  const toggleRef = useRef<HTMLDivElement>(null);
+
+  function switchTheme(nextTheme: SiteTheme) {
+    setTheme(nextTheme, toggleRef.current);
+  }
+
   return (
     <div
+      ref={toggleRef}
       className="flex items-center rounded-full"
       style={{
         width: 58,
         height: 24,
         padding: "0 3px",
-        background: "rgba(255,255,255,0.08)",
-        border: "0.5px solid rgba(255,255,255,0.12)",
-        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.035)",
+        background: "var(--note-control-fill)",
+        border: "0.5px solid var(--note-control-border)",
+        boxShadow: "inset 0 1px 0 var(--note-control-highlight)",
       }}
     >
-      <div className="grid h-5 w-[26px] place-items-center">
+      <button
+        type="button"
+        aria-pressed={theme === "light"}
+        aria-label="Switch website to light mode"
+        className="grid h-5 w-[26px] place-items-center rounded-full transition duration-150"
+        onClick={() => switchTheme("light")}
+        style={{
+          background: theme === "light" ? "var(--note-toggle-active)" : "transparent",
+          color: theme === "light" ? "var(--note-toggle-active-icon)" : "var(--note-toggle-icon)",
+        }}
+      >
         <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-          <circle cx="6" cy="6" r="2" fill="rgba(245,248,255,0.36)" />
+          <circle cx="6" cy="6" r="2" fill="currentColor" />
           <path
             d="M6 1.4v1.2M6 9.4v1.2M1.4 6h1.2M9.4 6h1.2M2.75 2.75l.85.85M8.4 8.4l.85.85M9.25 2.75l-.85.85M3.6 8.4l-.85.85"
-            stroke="rgba(245,248,255,0.32)"
+            stroke="currentColor"
             strokeLinecap="round"
             strokeWidth="0.9"
           />
         </svg>
-      </div>
+      </button>
 
-      <div
-        className="grid h-5 w-[26px] place-items-center rounded-full"
-        style={{ background: "rgba(255,255,255,0.18)" }}
+      <button
+        type="button"
+        aria-pressed={theme === "dark"}
+        aria-label="Switch website to dark mode"
+        className="grid h-5 w-[26px] place-items-center rounded-full transition duration-150"
+        onClick={() => switchTheme("dark")}
+        style={{
+          background: theme === "dark" ? "var(--note-toggle-active)" : "transparent",
+          color: theme === "dark" ? "var(--note-toggle-active-icon)" : "var(--note-toggle-icon)",
+        }}
       >
         <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
           <path
             d="M9.9 7.2A4.45 4.45 0 0 1 4.8 2.1a4.7 4.7 0 1 0 5.1 5.1Z"
-            fill="rgba(245,248,255,0.84)"
+            fill="currentColor"
           />
         </svg>
-      </div>
+      </button>
     </div>
   );
 }
@@ -155,7 +180,7 @@ function PlusIcon() {
 export default function HeroNoteReplica() {
   return (
     <motion.div
-      aria-hidden="true"
+      aria-label="Interactive N0te preview"
       initial={{ opacity: 0, scale: 0.97, y: 20 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ delay: 0.36, duration: 0.9, ease: EASE_OUT_SOFT }}
@@ -169,8 +194,7 @@ export default function HeroNoteReplica() {
         <div
           className="pointer-events-none absolute inset-0"
           style={{
-            background:
-              "linear-gradient(115deg, rgba(255,255,255,0.050), rgba(255,255,255,0.012) 34%, transparent 58%), radial-gradient(circle at 80% 18%, rgba(255,255,255,0.036), transparent 32%), radial-gradient(circle at 18% 78%, rgba(0,0,0,0.18), transparent 52%)",
+            background: "var(--note-sheen)",
           }}
         />
 
@@ -185,7 +209,7 @@ export default function HeroNoteReplica() {
               </ChromeButton>
             </div>
 
-            <div className="absolute left-1/2 top-0 -translate-x-1/2 scale-[0.96] opacity-0 transition duration-150 ease-[var(--ease-out)] group-hover:scale-100 group-hover:opacity-100">
+            <div className="absolute left-1/2 top-0 -translate-x-1/2 scale-[0.96] opacity-0 transition duration-150 ease-[var(--ease-out)] group-hover:scale-100 group-hover:opacity-100 focus-within:scale-100 focus-within:opacity-100">
               <ThemeToggle />
             </div>
 
@@ -201,7 +225,7 @@ export default function HeroNoteReplica() {
             <p
               className="m-0 text-left font-jura"
               style={{
-                color: "rgba(245,248,255,0.45)",
+                color: "var(--note-placeholder)",
                 fontSize: 15,
                 lineHeight: 1.34,
                 letterSpacing: 0,
@@ -222,7 +246,7 @@ export default function HeroNoteReplica() {
             <div
               className="font-jura"
               style={{
-                color: "rgba(245,248,255,0.28)",
+                color: "var(--note-title)",
                 fontSize: 10,
                 lineHeight: "24px",
                 letterSpacing: 0,

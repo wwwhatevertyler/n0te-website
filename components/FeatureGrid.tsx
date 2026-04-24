@@ -109,9 +109,9 @@ function FeatureCard({ feature }: { feature: (typeof features)[0] }) {
       transition={{ duration: 0.22, ease: EASE }}
       className="group relative rounded-2xl p-6 cursor-default"
       style={{
-        background: "rgba(255,255,255,0.03)",
-        border: "1px solid rgba(255,255,255,0.08)",
-        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)",
+        background: "var(--theme-card)",
+        border: "1px solid var(--theme-card-border)",
+        boxShadow: "inset 0 1px 0 var(--theme-card-highlight)",
       }}
     >
       <div

@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Jura } from "next/font/google";
 import "./globals.css";
+import { SiteThemeProvider } from "@/components/SiteThemeProvider";
 import SmoothScroll from "@/components/SmoothScroll";
+import ThemeBootScript from "@/components/ThemeBootScript";
 
 const jura = Jura({
   variable: "--font-jura",
@@ -35,9 +37,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${jura.variable} h-full antialiased`}>
-      <body suppressHydrationWarning className="min-h-full bg-[#111111] text-[#f0f4ff]">
-        <SmoothScroll>{children}</SmoothScroll>
+    <html lang="en" suppressHydrationWarning className={`${jura.variable} h-full antialiased`}>
+      <body suppressHydrationWarning className="min-h-full bg-bg text-fg">
+        <ThemeBootScript />
+        <SiteThemeProvider>
+          <SmoothScroll>{children}</SmoothScroll>
+        </SiteThemeProvider>
       </body>
     </html>
   );

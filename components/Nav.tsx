@@ -15,11 +15,11 @@ export default function Nav() {
         transition={{ duration: 0.7, ease: EASE_OUT_SOFT }}
         className="pointer-events-auto flex items-center gap-1 px-2 py-2 rounded-2xl"
         style={{
-          background: "rgba(18, 20, 24, 0.38)",
+          background: "color-mix(in srgb, var(--theme-page) 72%, transparent)",
           backdropFilter: "blur(40px) saturate(1.8)",
           WebkitBackdropFilter: "blur(40px) saturate(1.8)",
-          border: "0.7px solid rgba(255,255,255,0.07)",
-          boxShadow: "0 4px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.05)",
+          border: "0.7px solid var(--theme-card-border)",
+          boxShadow: "0 4px 32px rgba(0,0,0,0.18), inset 0 1px 0 var(--theme-card-highlight)",
         }}
       >
         {/* Logo */}
@@ -65,8 +65,8 @@ export default function Nav() {
           transition={PRESS_TRANSITION}
           className="text-[12.5px] font-medium text-white/80 hover:text-white px-3.5 py-1.5 rounded-xl transition-colors duration-200"
           style={{
-            background: "rgba(255,255,255,0.08)",
-            border: "0.7px solid rgba(255,255,255,0.10)",
+            background: "color-mix(in srgb, var(--theme-ink) 8%, transparent)",
+            border: "0.7px solid color-mix(in srgb, var(--theme-ink) 10%, transparent)",
           }}
         >
           Download

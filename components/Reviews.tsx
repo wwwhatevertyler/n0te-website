@@ -120,8 +120,8 @@ export default function Reviews() {
               transition={{ duration: 0.22, ease: EASE }}
               className="break-inside-avoid rounded-2xl p-5"
               style={{
-                background: "rgba(255,255,255,0.03)",
-                border: "1px solid rgba(255,255,255,0.08)",
+                background: "var(--theme-card)",
+                border: "1px solid var(--theme-card-border)",
               }}
             >
               <Stars />

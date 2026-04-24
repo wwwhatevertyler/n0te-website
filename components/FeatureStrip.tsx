@@ -95,8 +95,8 @@ export default function StayInFlow() {
               variants={slideRight}
               className="rounded-2xl p-5"
               style={{
-                background: "rgba(255,255,255,0.02)",
-                border: "1px solid rgba(255,255,255,0.05)",
+                background: "color-mix(in srgb, var(--theme-ink) 2%, transparent)",
+                border: "1px solid color-mix(in srgb, var(--theme-ink) 5%, transparent)",
               }}
             >
               <p className="text-[11px] font-medium text-white/20 uppercase tracking-widest mb-4">

@@ -12,7 +12,7 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen overflow-x-clip bg-[#111111] pb-24">
+    <main className="min-h-screen overflow-x-clip bg-bg pb-24">
       <Nav />
       <Hero />
       <StayInFlow />

@@ -54,9 +54,9 @@ export default function ObsidianVault() {
             <div
               className="rounded-2xl p-6"
               style={{
-                background: "rgba(255,255,255,0.02)",
-                border: "1px solid rgba(255,255,255,0.07)",
-                boxShadow: "inset 0 1px 0 rgba(255,255,255,0.035)",
+                background: "var(--theme-card)",
+                border: "1px solid var(--theme-card-border)",
+                boxShadow: "inset 0 1px 0 var(--theme-card-highlight)",
               }}
             >
               <div
@@ -214,8 +214,8 @@ export default function ObsidianVault() {
             <div
               className="rounded-2xl p-6"
               style={{
-                background: "rgba(255,255,255,0.02)",
-                border: "1px solid rgba(255,255,255,0.07)",
+                background: "var(--theme-card)",
+                border: "1px solid var(--theme-card-border)",
               }}
             >
               <p className="text-[10px] text-white/20 font-mono mb-4">

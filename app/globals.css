@@ -1,17 +1,19 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-bg: #111111;
-  --color-surface: rgba(20, 26, 32, 0.85);
-  --color-fg: #f0f4ff;
-  --color-muted: rgba(240, 244, 255, 0.48);
+  --color-bg: var(--theme-page);
+  --color-surface: var(--theme-surface);
+  --color-fg: var(--theme-ink);
+  --color-muted: var(--theme-muted);
   --color-accent: var(--n0te-accent);
-  --color-border: rgba(255, 255, 255, 0.12);
+  --color-border: var(--theme-border);
+  --color-white: var(--theme-ink);
   --font-jura: var(--font-jura);
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 :root {
+  color-scheme: dark;
   --n0te-accent-fallback: #9b72d0;
   --n0te-accent: var(--n0te-accent-fallback);
   --n0te-accent-text: #ffffff;
@@ -19,6 +21,66 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --theme-page: #111111;
+  --theme-page-rgb: 17 17 17;
+  --theme-ink: #f0f4ff;
+  --theme-ink-rgb: 240 244 255;
+  --theme-muted: rgba(240, 244, 255, 0.48);
+  --theme-border: rgba(240, 244, 255, 0.12);
+  --theme-surface: rgba(20, 26, 32, 0.85);
+  --theme-card: rgba(240, 244, 255, 0.03);
+  --theme-card-border: rgba(240, 244, 255, 0.08);
+  --theme-card-highlight: rgba(240, 244, 255, 0.04);
+  --theme-hero-overlay: linear-gradient(to bottom, #111111 0%, #111111 28%, rgba(17,17,17,0.82) 50%, rgba(17,17,17,0.18) 80%, rgba(17,17,17,0.08) 100%);
+  --theme-cta-bg: #f7f8fb;
+  --theme-cta-fg: #0d1117;
+  --theme-cta-bg-hover: rgba(247, 248, 251, 0.9);
+  --theme-origin-x: 50vw;
+  --theme-origin-y: 38vh;
+  --note-surface: linear-gradient(180deg, rgba(43,44,44,0.54) 0%, rgba(30,31,31,0.42) 100%);
+  --note-border: rgba(255,255,255,0.16);
+  --note-shadow: inset 0 1px 0 rgba(255,255,255,0.10), inset 0 -1px 0 rgba(0,0,0,0.22), 0 0 0 0.5px rgba(255,255,255,0.04);
+  --note-sheen: linear-gradient(115deg, rgba(255,255,255,0.050), rgba(255,255,255,0.012) 34%, transparent 58%), radial-gradient(circle at 80% 18%, rgba(255,255,255,0.036), transparent 32%), radial-gradient(circle at 18% 78%, rgba(0,0,0,0.18), transparent 52%);
+  --note-control-fill: rgba(255,255,255,0.08);
+  --note-control-border: rgba(255,255,255,0.12);
+  --note-control-highlight: rgba(255,255,255,0.035);
+  --note-control-icon: rgba(245,248,255,0.52);
+  --note-toggle-active: rgba(255,255,255,0.18);
+  --note-toggle-icon: rgba(245,248,255,0.38);
+  --note-toggle-active-icon: rgba(245,248,255,0.84);
+  --note-placeholder: rgba(245,248,255,0.45);
+  --note-title: rgba(245,248,255,0.28);
+}
+
+:root[data-site-theme="light"] {
+  color-scheme: light;
+  --theme-page: #f2eee6;
+  --theme-page-rgb: 242 238 230;
+  --theme-ink: #202326;
+  --theme-ink-rgb: 32 35 38;
+  --theme-muted: rgba(32, 35, 38, 0.52);
+  --theme-border: rgba(32, 35, 38, 0.12);
+  --theme-surface: rgba(255, 253, 248, 0.72);
+  --theme-card: rgba(32, 35, 38, 0.035);
+  --theme-card-border: rgba(32, 35, 38, 0.09);
+  --theme-card-highlight: rgba(255, 255, 255, 0.72);
+  --theme-hero-overlay: linear-gradient(to bottom, #f2eee6 0%, #f2eee6 26%, rgba(242,238,230,0.82) 50%, rgba(242,238,230,0.24) 82%, rgba(242,238,230,0.08) 100%);
+  --theme-cta-bg: #202326;
+  --theme-cta-fg: #f7f2e8;
+  --theme-cta-bg-hover: rgba(32, 35, 38, 0.88);
+  --note-surface: linear-gradient(180deg, rgba(255,252,244,0.58) 0%, rgba(236,231,220,0.44) 100%);
+  --note-border: rgba(35,35,35,0.12);
+  --note-shadow: inset 0 1px 0 rgba(255,255,255,0.58), inset 0 -1px 0 rgba(0,0,0,0.07), 0 0 0 0.5px rgba(0,0,0,0.04);
+  --note-sheen: linear-gradient(115deg, rgba(255,255,255,0.32), rgba(255,255,255,0.08) 34%, transparent 58%), radial-gradient(circle at 80% 18%, rgba(255,255,255,0.20), transparent 32%), radial-gradient(circle at 18% 78%, rgba(0,0,0,0.06), transparent 52%);
+  --note-control-fill: rgba(255,255,255,0.42);
+  --note-control-border: rgba(255,255,255,0.58);
+  --note-control-highlight: rgba(255,255,255,0.42);
+  --note-control-icon: rgba(0,0,0,0.50);
+  --note-toggle-active: rgba(255,255,255,0.76);
+  --note-toggle-icon: rgba(0,0,0,0.34);
+  --note-toggle-active-icon: rgba(0,0,0,0.50);
+  --note-placeholder: rgba(0,0,0,0.42);
+  --note-title: rgba(0,0,0,0.42);
 }
 
 @supports (color: AccentColor) {
@@ -29,20 +91,26 @@
 }
 
 html {
-  background: #111111;
-  color: #f0f4ff;
+  background: var(--theme-page);
+  color: var(--theme-ink);
   overscroll-behavior-y: none;
   scroll-padding-top: 88px;
+  transition:
+    background-color 420ms var(--ease-out),
+    color 420ms var(--ease-out);
 }
 
 body {
   min-height: 100%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #111111;
-  color: #f0f4ff;
+  background: var(--theme-page);
+  color: var(--theme-ink);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: clip;
+  transition:
+    background-color 420ms var(--ease-out),
+    color 420ms var(--ease-out);
 }
 
 html.lenis,
@@ -77,13 +145,13 @@ button {
 
 /* Glass surface utility */
 .glass {
-  background: rgba(20, 26, 32, 0.72);
+  background: var(--theme-surface);
   backdrop-filter: blur(24px) saturate(1.4);
   -webkit-backdrop-filter: blur(24px) saturate(1.4);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--theme-border);
   box-shadow:
-    inset 0 1px 0 rgba(200, 220, 255, 0.08),
-    0 0 0 0.5px rgba(255, 255, 255, 0.06),
+    inset 0 1px 0 var(--theme-card-highlight),
+    0 0 0 0.5px var(--theme-card-border),
     0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
@@ -95,5 +163,10 @@ button {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-padding-top: 80px;
+  }
+
+  html,
+  body {
+    transition: none;
   }
 }

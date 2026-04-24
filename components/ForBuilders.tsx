@@ -105,8 +105,8 @@ export default function ForBuilders() {
                 variants={cardItem}
                 className="flex gap-4 p-5 rounded-2xl group"
                 style={{
-                  background: "rgba(255,255,255,0.025)",
-                  border: "1px solid rgba(255,255,255,0.07)",
+                  background: "var(--theme-card)",
+                  border: "1px solid var(--theme-card-border)",
                 }}
               >
                 <div className="w-0.5 shrink-0 mt-0.5 rounded-full bg-white/10" />
@@ -131,9 +131,9 @@ export default function ForBuilders() {
           viewport={REVEAL_VIEWPORT}
           className="rounded-3xl p-10 sm:p-14"
           style={{
-            background: "rgba(255,255,255,0.025)",
-            border: "1px solid rgba(255,255,255,0.08)",
-            boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)",
+            background: "var(--theme-card)",
+            border: "1px solid var(--theme-card-border)",
+            boxShadow: "inset 0 1px 0 var(--theme-card-highlight)",
           }}
         >
           <motion.p

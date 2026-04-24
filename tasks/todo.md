@@ -33,6 +33,7 @@
 - [x] Changed the `With N0te` card step text to use the purple accent instead of dark text.
 - [x] Removed viewport-based shader pausing so the hero note shader stays active while scrolling.
 - [x] Removed viewport-sensitive backdrop blur from the hero note and softened the light-mode lower inset.
+- [x] Moved the Pexels landscape into `public/images` and added an editorial note-over-landscape section.
 
 ## Verification
 - `./node_modules/.bin/tsc --noEmit`
@@ -77,6 +78,7 @@
 - Updated `With N0te` card step text color before re-running verification.
 - Removed viewport-based shader pausing before re-running verification.
 - Removed hero note `backdrop-filter` and softened the light-mode bottom inset before re-running verification.
+- Added the landscape note section before re-running verification.
 
 ## Result
 - Lenis is mounted globally with reduced-motion handling and anchor support.
@@ -102,3 +104,4 @@
 - `With N0te` card body copy now reads as purple/accented instead of black in light mode.
 - Hero note shader no longer snaps to a stopped state at viewport edges; it only stops for reduced-motion users.
 - Hero note uses stable internal material layers instead of viewport-sensitive backdrop blur, preventing edge darkening while scrolling.
+- A mid-page landscape band now uses the Pexels image with the stable note preview overlaid.

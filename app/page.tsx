@@ -2,6 +2,7 @@ import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import StayInFlow from "@/components/FeatureStrip";
 import FeatureGrid from "@/components/FeatureGrid";
+import LandscapeNoteSection from "@/components/LandscapeNoteSection";
 import ObsidianVault from "@/components/ObsidianVault";
 import ForBuilders from "@/components/ForBuilders";
 import ObjectionSection from "@/components/ObjectionSection";
@@ -17,6 +18,7 @@ export default function Home() {
       <Hero />
       <StayInFlow />
       <FeatureGrid />
+      <LandscapeNoteSection />
       <ObsidianVault />
       <ForBuilders />
       <ObjectionSection />

@@ -151,7 +151,7 @@ export default function StayInFlow() {
                     >
                       <span className="text-[9px]" style={{ color: "color-mix(in srgb, var(--n0te-accent) 80%, white)" }}>{i + 1}</span>
                     </div>
-                    <span className="text-[13px] text-white/75">{step}</span>
+                    <span className="text-[13px] font-medium" style={{ color: "color-mix(in srgb, var(--n0te-accent) 82%, var(--theme-ink))" }}>{step}</span>
                   </div>
                 ))}
               </div>

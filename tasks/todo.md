@@ -16,6 +16,7 @@
 - [x] Added site-wide light/dark theme state controlled by the hero note toggle.
 - [x] Added persisted theme choice and pre-hydration theme boot script.
 - [x] Removed the radial theme wash so hero-note theme changes happen instantly.
+- [x] Lightened the hero shader palettes for both dark and light theme states.
 
 ## Verification
 - `./node_modules/.bin/tsc --noEmit`
@@ -32,6 +33,8 @@
 - Local dev page opened at `http://127.0.0.1:3000`; Next logged `GET / 200`.
 - Changed the hero-note theme toggle to an instant swap and re-ran `./node_modules/.bin/tsc --noEmit`.
 - Changed the hero-note theme toggle to an instant swap and re-ran `npm run build`.
+- Lightened hero shader colors and re-ran `./node_modules/.bin/tsc --noEmit`.
+- Lightened hero shader colors and re-ran `npm run build`.
 
 ## Result
 - Lenis is mounted globally with reduced-motion handling and anchor support.
@@ -41,3 +44,4 @@
 - Hero badge restored to Free + Obsidian copy, hard-coded purple accents moved to shared system-accent tokens, and the hero note preview was rebuilt against native app metrics.
 - Native app replica spec now exists at `/Users/whatevertyler/N0te/docs/web-note-replica-spec.md`; website summary points to it from `VISUAL_REFERENCE.md`.
 - Hero note light/dark toggle now controls the website theme instantly and remembers the selected mode.
+- Hero shader keeps its bright stop while using lifted charcoal tones in dark mode and warm material tones in light mode.

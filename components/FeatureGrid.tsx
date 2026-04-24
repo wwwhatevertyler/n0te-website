@@ -143,8 +143,10 @@ function FeatureCard({ feature }: { feature: (typeof features)[0] }) {
 
 export default function FeatureGrid() {
   return (
-    <section id="features" className="relative py-28 px-6">
+    <section id="features" className="relative px-6 pb-28">
       <div className="max-w-5xl mx-auto">
+        <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-28" />
+
         <motion.div
           variants={headingContainer}
           initial="hidden"

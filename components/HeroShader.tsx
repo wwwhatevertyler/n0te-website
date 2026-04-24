@@ -13,7 +13,7 @@ export default function HeroShader({ className }: { className?: string }) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(wrapperRef, { margin: "20% 0px 20% 0px" });
   const shouldReduceMotion = useReducedMotion();
-  const speed = shouldReduceMotion || !isInView ? 0 : 0.32;
+  const speed = shouldReduceMotion || !isInView ? 0 : 1.0;
 
   return (
     <div ref={wrapperRef} className={className}>

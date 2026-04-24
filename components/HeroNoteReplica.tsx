@@ -181,10 +181,6 @@ export default function HeroNoteReplica() {
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ delay: 0.36, duration: 0.9, ease: EASE_OUT_SOFT }}
       className="group relative select-none"
-      style={{
-        filter:
-          "drop-shadow(0 24px 58px rgba(0,0,0,0.50)) drop-shadow(0 6px 18px rgba(0,0,0,0.36))",
-      }}
     >
       <div className="relative overflow-hidden" style={noteFrameStyle}>
         <div

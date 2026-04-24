@@ -25,6 +25,7 @@
 - [x] Normalized divider-led section spacing so dividers sit between equal vertical gaps.
 - [x] Added the missing divider above the `Always there. Never in the way.` features section.
 - [x] Moved the hero shader from the full hero background to a localized glow behind the note preview.
+- [x] Removed the localized shader/glow so the hero shows only the actual note preview.
 
 ## Verification
 - `./node_modules/.bin/tsc --noEmit`
@@ -60,6 +61,8 @@
 - Moved shader behind the note preview and re-ran `./node_modules/.bin/tsc --noEmit`.
 - Re-ran `npm run build` after localizing the hero shader.
 - Opened `http://127.0.0.1:3000`; Next logged `GET / 200`.
+- Removed localized note shader/glow and re-ran `./node_modules/.bin/tsc --noEmit`.
+- Re-ran `npm run build` after removing the note shader/glow.
 
 ## Result
 - Lenis is mounted globally with reduced-motion handling and anchor support.
@@ -76,4 +79,5 @@
 - Fast-scroll behavior should no longer backlog as heavily because Lenis uses tighter damping and the animated hero shader stops when offscreen or reduced motion is active.
 - Divider-led sections now remove extra top padding before the line and use the same 112px rhythm above and below each divider.
 - The features section now follows the same divider-led rhythm as the other main page sections.
-- Hero shader is no longer a full-section background; it is clipped behind the note preview as a localized material glow.
+- Hero shader is no longer a full-section background.
+- Hero now shows the note preview without any extra shader/glow space around it.

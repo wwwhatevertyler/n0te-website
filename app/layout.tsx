@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Jura } from "next/font/google";
 import "./globals.css";
+import SmoothScroll from "@/components/SmoothScroll";
 
 const jura = Jura({
   variable: "--font-jura",
@@ -35,7 +36,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${jura.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full bg-[#111111] text-[#f0f4ff]">
+        <SmoothScroll>{children}</SmoothScroll>
+      </body>
     </html>
   );
 }

@@ -1,9 +1,29 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
+import { EASE_OUT_SOFT, REVEAL_VIEWPORT } from "@/lib/motion";
 
-const ease = [0.23, 1, 0.32, 1] as const;
+const EASE = EASE_OUT_SOFT;
+
+const headingContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08 } },
+};
+
+const headingItem = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
+};
+
+const cardContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.07 } },
+};
+
+const cardItem = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } },
+};
 
 const reviews = [
   {
@@ -20,7 +40,7 @@ const reviews = [
   },
   {
     title: "Feels like it belongs on macOS",
-    body: "The glass window, the way it snaps next to other notes, the spring animations — it's genuinely premium. Can't believe it's free.",
+    body: "The glass window, the way it snaps next to other notes, the spring animations — it's genuinely premium. It feels like it belongs on my desktop.",
     author: "LiamHollis",
     date: "01/2026",
   },
@@ -48,7 +68,7 @@ function Stars() {
   return (
     <div className="flex gap-0.5">
       {[...Array(5)].map((_, i) => (
-        <svg key={i} width="12" height="12" viewBox="0 0 12 12" fill="#FF9F0A">
+        <svg key={i} width="12" height="12" viewBox="0 0 12 12" fill="rgba(255,255,255,0.35)">
           <path d="M6 1l1.24 2.5L10 3.9l-2 1.95.47 2.75L6 7.25 3.53 8.6 4 5.85 2 3.9l2.76-.4L6 1z" />
         </svg>
       ))}
@@ -57,43 +77,47 @@ function Stars() {
 }
 
 export default function Reviews() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-
   return (
     <section id="reviews" className="relative py-28 px-6">
-      {/* Top divider */}
       <div className="max-w-5xl mx-auto mb-20">
         <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       </div>
 
       <div className="max-w-5xl mx-auto">
-        <div ref={ref} className="text-center mb-16">
+        <motion.div
+          variants={headingContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={REVEAL_VIEWPORT}
+          className="text-center mb-16"
+        >
           <motion.h2
-            initial={{ opacity: 0, y: 16 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, ease }}
-            className="text-[40px] sm:text-[48px] font-semibold font-jura text-white tracking-tight"
+            variants={headingItem}
+            className="text-[34px] sm:text-[42px] font-semibold font-jura text-white tracking-tight"
           >
             Loved by Mac users.
           </motion.h2>
           <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.1, duration: 0.5, ease }}
-            className="mt-4 text-[16px] text-white/45"
+            variants={headingItem}
+            className="mt-4 text-[15px] text-white/45"
           >
             Available on the Mac App Store.
           </motion.p>
-        </div>
+        </motion.div>
 
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
-          {reviews.map((review, i) => (
+        <motion.div
+          variants={cardContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={REVEAL_VIEWPORT}
+          className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4"
+        >
+          {reviews.map((review) => (
             <motion.div
               key={review.author}
-              initial={{ opacity: 0, y: 16 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.07, duration: 0.5, ease }}
+              variants={cardItem}
+              whileHover={{ y: -4 }}
+              transition={{ duration: 0.22, ease: EASE }}
               className="break-inside-avoid rounded-2xl p-5"
               style={{
                 background: "rgba(255,255,255,0.03)",
@@ -101,7 +125,7 @@ export default function Reviews() {
               }}
             >
               <Stars />
-              <p className="mt-3 text-[14px] font-semibold text-white/90 font-jura leading-snug">
+              <p className="mt-3 text-[13px] font-semibold text-white/90 font-jura leading-snug">
                 {review.title}
               </p>
               <p className="mt-2 text-[13px] text-white/45 leading-relaxed">
@@ -113,7 +137,7 @@ export default function Reviews() {
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

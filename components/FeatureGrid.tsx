@@ -1,9 +1,29 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
+import { EASE_OUT_SOFT, REVEAL_VIEWPORT } from "@/lib/motion";
 
-const ease = [0.23, 1, 0.32, 1] as const;
+const EASE = EASE_OUT_SOFT;
+
+const headingContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08 } },
+};
+
+const headingItem = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
+};
+
+const cardContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.06 } },
+};
+
+const cardItem = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } },
+};
 
 const features = [
   {
@@ -81,23 +101,12 @@ const features = [
   },
 ];
 
-function FeatureCard({
-  feature,
-  index,
-}: {
-  feature: (typeof features)[0];
-  index: number;
-}) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-
+function FeatureCard({ feature }: { feature: (typeof features)[0] }) {
   return (
     <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ delay: index * 0.06, duration: 0.5, ease }}
-      whileHover={{ scale: 1.02 }}
+      variants={cardItem}
+      whileHover={{ y: -4, scale: 1.01 }}
+      transition={{ duration: 0.22, ease: EASE }}
       className="group relative rounded-2xl p-6 cursor-default"
       style={{
         background: "rgba(255,255,255,0.03)",
@@ -115,14 +124,13 @@ function FeatureCard({
       >
         {feature.icon}
       </div>
-      <h3 className="text-[15px] font-semibold text-white/90 mb-2 font-jura">
+      <h3 className="text-[13px] font-semibold text-white/90 mb-2 font-jura">
         {feature.title}
       </h3>
       <p className="text-[13px] text-white/45 leading-relaxed">
         {feature.description}
       </p>
 
-      {/* Hover glow */}
       <div
         className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
         style={{
@@ -134,40 +142,43 @@ function FeatureCard({
 }
 
 export default function FeatureGrid() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-
   return (
     <section id="features" className="relative py-28 px-6">
       <div className="max-w-5xl mx-auto">
-        {/* Section header */}
-        <div ref={ref} className="text-center mb-16">
+        <motion.div
+          variants={headingContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={REVEAL_VIEWPORT}
+          className="text-center mb-16"
+        >
           <motion.h2
-            initial={{ opacity: 0, y: 16 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, ease }}
-            className="text-[40px] sm:text-[48px] font-semibold font-jura text-white leading-tight tracking-tight"
+            variants={headingItem}
+            className="text-[34px] sm:text-[42px] font-semibold font-jura text-white leading-tight tracking-tight"
           >
             Always there.
             <br />
             <span className="text-white/35">Never in the way.</span>
           </motion.h2>
           <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.1, duration: 0.5, ease }}
-            className="mt-4 text-[16px] text-white/45 max-w-md mx-auto"
+            variants={headingItem}
+            className="mt-4 text-[15px] text-white/45 max-w-md mx-auto"
           >
             Everything you need to capture a thought fast and get it somewhere useful.
           </motion.p>
-        </div>
+        </motion.div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {features.map((feature, i) => (
-            <FeatureCard key={feature.title} feature={feature} index={i} />
+        <motion.div
+          variants={cardContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={REVEAL_VIEWPORT}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+        >
+          {features.map((feature) => (
+            <FeatureCard key={feature.title} feature={feature} />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

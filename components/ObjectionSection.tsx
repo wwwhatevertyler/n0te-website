@@ -20,7 +20,7 @@ const faqs = [
   },
   {
     q: "Does it require an account or subscription?",
-    a: "No account, no subscription, no cloud. Free to download on the Mac App Store. A paid version is planned as the product matures — but the core capture experience is available today.",
+    a: "No account, no subscription, no cloud. The core capture experience is available today on the Mac App Store while the product continues to mature.",
   },
   {
     q: "What Obsidian vaults does it support?",

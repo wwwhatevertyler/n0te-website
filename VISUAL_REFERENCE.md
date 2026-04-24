@@ -95,6 +95,40 @@ Bad translation moves:
 - surrounding the note with too many badges, pills, and feature chips
 - relying on web-only visual metaphors that have nothing to do with the app
 
+## Web Note Replica Spec
+
+App-side narrow spec:
+
+- `/Users/whatevertyler/N0te/docs/web-note-replica-spec.md`
+
+Source files:
+
+- `/Users/whatevertyler/N0te/Sources/N0te/UI/NoteView.swift`
+- `/Users/whatevertyler/N0te/Sources/N0te/UI/GlassSurface.swift`
+- `/Users/whatevertyler/N0te/Sources/N0te/UI/WindowIconButton.swift`
+- `/Users/whatevertyler/N0te/Sources/N0te/UI/ThemeToggle.swift`
+- `/Users/whatevertyler/N0te/Sources/N0te/UI/NativeNoteEditor.swift`
+- `/Users/whatevertyler/N0te/Sources/N0te/Models/WindowStyleConfiguration.swift`
+
+Replica constants:
+
+- Note frame: 300 x 208
+- Corner radius: 38
+- Surface padding: 20
+- Header height: 24
+- Editor top padding: 14
+- Title slot: height 24, top padding 10, bottom padding 1, visual y offset 4
+- Round controls: 24 x 24, 8px gap
+- Theme toggle: 58 x 24, 26 x 20 options, hidden until note hover
+- Editor font: Jura 15
+- Default title for website preview: `Mineral Horizon`
+
+The website should use a React replica, not SwiftUI/AppKit runtime sharing. Keep the replica synchronized from the native metrics and real assets, especially the Obsidian export PNG.
+
+## Accent Color Rule
+
+Native N0te uses `NSColor.controlAccentColor` for meaningful active states such as microphone activity and selected/status highlights. The website equivalent is `--n0te-accent`, which uses CSS `AccentColor` where supported and falls back to N0te purple. Use accent sparingly for the hero badge dot, active/status highlights, and the positive “With N0te” emphasis state.
+
 ## Design Defaults For Future Web Work
 
 If a website visual decision is unclear, default to:

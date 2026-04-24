@@ -147,6 +147,29 @@ button {
     0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
+.nav-glass-logo {
+  color: color-mix(in srgb, var(--theme-ink) 82%, transparent);
+}
+
+.nav-glass-logo:hover,
+.nav-glass-link:hover {
+  background: color-mix(in srgb, var(--theme-ink) 7%, transparent);
+  color: color-mix(in srgb, var(--theme-ink) 86%, transparent);
+}
+
+.nav-glass-link {
+  color: color-mix(in srgb, var(--theme-ink) 48%, transparent);
+}
+
+.nav-glass-cta {
+  color: color-mix(in srgb, var(--theme-ink) 82%, transparent);
+}
+
+.nav-glass-cta:hover {
+  color: var(--theme-ink);
+  background: color-mix(in srgb, var(--theme-ink) 13%, transparent) !important;
+}
+
 /* Jura font for headlines */
 .font-jura {
   font-family: var(--font-jura), "Jura", sans-serif;

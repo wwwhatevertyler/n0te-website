@@ -28,6 +28,7 @@
 - [x] Removed the localized shader/glow so the hero shows only the actual note preview.
 - [x] Removed the remaining external note preview drop-shadow and restored shader speed to the original fast value.
 - [x] Re-mounted the hero shader inside the note frame so it is clipped to the actual card.
+- [x] Restored the sticky nav liquid-glass transparency and theme-aware hover states.
 
 ## Verification
 - `./node_modules/.bin/tsc --noEmit`
@@ -67,6 +68,7 @@
 - Re-ran `npm run build` after removing the note shader/glow.
 - Removed the external note wrapper shadow and restored shader speed to `1.0`.
 - Re-mounted the shader inside the clipped note card before re-running verification.
+- Restored the sticky nav glass material before re-running verification.
 
 ## Result
 - Lenis is mounted globally with reduced-motion handling and anchor support.
@@ -87,3 +89,4 @@
 - Hero now shows the note preview without any extra shader/glow space around it.
 - Hero note no longer renders a broad circular wrapper shadow, and shader animation speed is back to the original value when used.
 - The animated shader is visible only inside the hero note material, clipped by the card radius.
+- Sticky nav uses a more transparent liquid-glass surface again, with tokenized text, dividers, and hover states.

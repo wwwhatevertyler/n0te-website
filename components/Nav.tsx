@@ -14,17 +14,22 @@ export default function Nav() {
         initial={{ opacity: 0, y: 18, scale: 0.985 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.7, ease: EASE_OUT_SOFT }}
-        className="pointer-events-auto flex items-center gap-1 px-2 py-2 rounded-2xl"
+        className="pointer-events-auto flex items-center gap-1 overflow-hidden px-2 py-2 rounded-2xl"
         style={{
-          background: "color-mix(in srgb, var(--theme-page) 72%, transparent)",
-          backdropFilter: "blur(40px) saturate(1.8)",
-          WebkitBackdropFilter: "blur(40px) saturate(1.8)",
-          border: "0.7px solid var(--theme-card-border)",
-          boxShadow: "0 4px 32px rgba(0,0,0,0.18), inset 0 1px 0 var(--theme-card-highlight)",
+          background:
+            "linear-gradient(135deg, color-mix(in srgb, var(--theme-ink) 10%, transparent), color-mix(in srgb, var(--theme-page) 28%, transparent) 45%, color-mix(in srgb, var(--theme-ink) 5%, transparent)), color-mix(in srgb, var(--theme-page) 38%, transparent)",
+          backdropFilter: "blur(44px) saturate(1.9) brightness(1.08)",
+          WebkitBackdropFilter: "blur(44px) saturate(1.9) brightness(1.08)",
+          border: "0.7px solid color-mix(in srgb, var(--theme-ink) 14%, transparent)",
+          boxShadow:
+            "0 18px 52px rgba(0,0,0,0.18), inset 0 1px 0 color-mix(in srgb, var(--theme-ink) 18%, transparent), inset 0 -1px 0 color-mix(in srgb, var(--theme-page) 34%, transparent)",
         }}
       >
         {/* Logo */}
-        <a href="/" className="flex items-center gap-2 px-2.5 py-1.5 rounded-xl hover:bg-white/[0.05] transition-colors duration-200">
+        <a
+          href="/"
+          className="nav-glass-logo flex items-center gap-2 px-2.5 py-1.5 rounded-xl transition-colors duration-200"
+        >
           <Image
             src="/images/icon.png"
             alt="N0te"
@@ -33,28 +38,38 @@ export default function Nav() {
             loading="eager"
             className="h-6 w-6"
           />
-          <span className="text-[13px] font-semibold text-white/80 font-jura tracking-tight">N0te</span>
+          <span className="text-[13px] font-semibold font-jura tracking-tight">N0te</span>
         </a>
 
         {/* Divider */}
-        <div className="w-px h-4 bg-white/[0.08] mx-1" />
+        <div
+          className="w-px h-4 mx-1"
+          style={{
+            background: "color-mix(in srgb, var(--theme-ink) 11%, transparent)",
+          }}
+        />
 
         {/* Links */}
         <a
           href="#features"
-          className="text-[12.5px] text-white/45 hover:text-white/80 transition-colors duration-200 px-3 py-1.5 rounded-xl hover:bg-white/[0.05]"
+          className="nav-glass-link text-[12.5px] transition-colors duration-200 px-3 py-1.5 rounded-xl"
         >
           Features
         </a>
         <a
           href="#pricing"
-          className="text-[12.5px] text-white/45 hover:text-white/80 transition-colors duration-200 px-3 py-1.5 rounded-xl hover:bg-white/[0.05]"
+          className="nav-glass-link text-[12.5px] transition-colors duration-200 px-3 py-1.5 rounded-xl"
         >
           Pricing
         </a>
 
         {/* Divider */}
-        <div className="w-px h-4 bg-white/[0.08] mx-1" />
+        <div
+          className="w-px h-4 mx-1"
+          style={{
+            background: "color-mix(in srgb, var(--theme-ink) 11%, transparent)",
+          }}
+        />
 
         {/* CTA */}
         <Magnetic>
@@ -65,10 +80,10 @@ export default function Nav() {
             whileHover={{ y: -1, scale: 1.02 }}
             whileTap={{ scale: 0.96 }}
             transition={PRESS_TRANSITION}
-            className="inline-flex items-center gap-1.5 text-[12.5px] font-medium text-white/80 hover:text-white px-3.5 py-1.5 rounded-xl transition-colors duration-200"
+            className="nav-glass-cta inline-flex items-center gap-1.5 text-[12.5px] font-medium px-3.5 py-1.5 rounded-xl transition-colors duration-200"
             style={{
-              background: "color-mix(in srgb, var(--theme-ink) 8%, transparent)",
-              border: "0.7px solid color-mix(in srgb, var(--theme-ink) 10%, transparent)",
+              background: "color-mix(in srgb, var(--theme-ink) 9%, transparent)",
+              border: "0.7px solid color-mix(in srgb, var(--theme-ink) 12%, transparent)",
             }}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">

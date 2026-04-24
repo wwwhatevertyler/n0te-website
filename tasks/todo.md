@@ -32,6 +32,7 @@
 - [x] Isolated the hero note paint layer and removed light-mode dark sheen contribution near the viewport edge.
 - [x] Changed the `With N0te` card step text to use the purple accent instead of dark text.
 - [x] Removed viewport-based shader pausing so the hero note shader stays active while scrolling.
+- [x] Removed viewport-sensitive backdrop blur from the hero note and softened the light-mode lower inset.
 
 ## Verification
 - `./node_modules/.bin/tsc --noEmit`
@@ -75,6 +76,7 @@
 - Isolated the hero note paint layer and removed the light-mode black radial sheen before re-running verification.
 - Updated `With N0te` card step text color before re-running verification.
 - Removed viewport-based shader pausing before re-running verification.
+- Removed hero note `backdrop-filter` and softened the light-mode bottom inset before re-running verification.
 
 ## Result
 - Lenis is mounted globally with reduced-motion handling and anchor support.
@@ -99,3 +101,4 @@
 - Light-mode note rendering no longer includes an internal dark radial sheen and is explicitly clipped/contained to avoid edge darkening.
 - `With N0te` card body copy now reads as purple/accented instead of black in light mode.
 - Hero note shader no longer snaps to a stopped state at viewport edges; it only stops for reduced-motion users.
+- Hero note uses stable internal material layers instead of viewport-sensitive backdrop blur, preventing edge darkening while scrolling.

@@ -25,16 +25,6 @@ const fadeUp = {
   },
 };
 
-const noteReveal = {
-  hidden: { opacity: 0, scale: 0.88, y: 24 },
-  show: {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    transition: { duration: 0.46, ease: EASE_OUT_SOFT },
-  },
-};
-
 const landscapeNoteVars = {
   "--note-surface":
     "linear-gradient(180deg, color-mix(in srgb, var(--theme-page) 78%, rgba(255,255,255,0.72)) 0%, color-mix(in srgb, var(--theme-page) 70%, rgba(255,255,255,0.62)) 100%)",
@@ -107,8 +97,7 @@ export default function LandscapeNoteSection() {
             />
 
             <div className="relative flex min-h-[500px] items-center justify-center px-5 py-16 sm:min-h-[560px] sm:px-16 lg:px-24">
-              <motion.div
-                variants={noteReveal}
+              <div
                 className="relative origin-center"
                 style={landscapeNoteVars}
               >
@@ -122,7 +111,7 @@ export default function LandscapeNoteSection() {
                   }}
                 />
                 <HeroNoteReplica />
-              </motion.div>
+              </div>
             </div>
           </div>
         </motion.div>

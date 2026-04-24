@@ -36,6 +36,7 @@
 - [x] Moved the Pexels landscape into `public/images` and added an editorial note-over-landscape section.
 - [x] Centered the landscape note, removed the left-side wash, and added a sharper scroll reveal.
 - [x] Added scroll-linked image zoom and a stronger landscape-only liquid glass note material.
+- [x] Removed the landscape note reveal so the note is present immediately.
 
 ## Verification
 - `./node_modules/.bin/tsc --noEmit`
@@ -83,6 +84,7 @@
 - Added the landscape note section before re-running verification.
 - Polished the landscape section note placement and reveal animation before re-running verification.
 - Added landscape image scroll zoom and stronger note glass material before re-running verification.
+- Removed the landscape note reveal animation before re-running verification.
 
 ## Result
 - Lenis is mounted globally with reduced-motion handling and anchor support.
@@ -111,3 +113,4 @@
 - A mid-page landscape band now uses the Pexels image with the stable note preview overlaid.
 - Landscape note now sits centered over the image and enters with a short opacity/scale reveal without a left-side light wash.
 - Landscape image now eases from a slight zoom into place on scroll, while the overlaid note has a denser frosted glass shell.
+- Landscape note now renders immediately while the background image keeps its scroll zoom.

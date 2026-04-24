@@ -11,11 +11,15 @@ const noteFrameStyle: CSSProperties = {
   width: 300,
   height: 208,
   borderRadius: 38,
+  clipPath: "inset(0 round 38px)",
   background: "var(--note-surface)",
+  backgroundClip: "padding-box",
   backdropFilter: "blur(58px) saturate(1.58) brightness(1.08) contrast(1.04)",
   WebkitBackdropFilter: "blur(58px) saturate(1.58) brightness(1.08) contrast(1.04)",
   border: "0.7px solid var(--note-border)",
   boxShadow: "var(--note-shadow)",
+  contain: "paint",
+  isolation: "isolate",
 };
 
 function ChromeButton({

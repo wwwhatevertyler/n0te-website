@@ -29,6 +29,7 @@
 - [x] Removed the remaining external note preview drop-shadow and restored shader speed to the original fast value.
 - [x] Re-mounted the hero shader inside the note frame so it is clipped to the actual card.
 - [x] Restored the sticky nav liquid-glass transparency and theme-aware hover states.
+- [x] Isolated the hero note paint layer and removed light-mode dark sheen contribution near the viewport edge.
 
 ## Verification
 - `./node_modules/.bin/tsc --noEmit`
@@ -69,6 +70,7 @@
 - Removed the external note wrapper shadow and restored shader speed to `1.0`.
 - Re-mounted the shader inside the clipped note card before re-running verification.
 - Restored the sticky nav glass material before re-running verification.
+- Isolated the hero note paint layer and removed the light-mode black radial sheen before re-running verification.
 
 ## Result
 - Lenis is mounted globally with reduced-motion handling and anchor support.
@@ -90,3 +92,4 @@
 - Hero note no longer renders a broad circular wrapper shadow, and shader animation speed is back to the original value when used.
 - The animated shader is visible only inside the hero note material, clipped by the card radius.
 - Sticky nav uses a more transparent liquid-glass surface again, with tokenized text, dividers, and hover states.
+- Light-mode note rendering no longer includes an internal dark radial sheen and is explicitly clipped/contained to avoid edge darkening.

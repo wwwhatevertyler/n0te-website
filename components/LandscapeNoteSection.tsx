@@ -23,6 +23,16 @@ const fadeUp = {
   },
 };
 
+const noteReveal = {
+  hidden: { opacity: 0, scale: 0.88, y: 24 },
+  show: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { duration: 0.46, ease: EASE_OUT_SOFT },
+  },
+};
+
 export default function LandscapeNoteSection() {
   return (
     <section className="relative px-6 pb-28">
@@ -59,21 +69,21 @@ export default function LandscapeNoteSection() {
               className="pointer-events-none absolute inset-0"
               style={{
                 background:
-                  "linear-gradient(90deg, rgba(var(--theme-page-rgb) / 0.70) 0%, rgba(var(--theme-page-rgb) / 0.28) 44%, rgba(var(--theme-page-rgb) / 0.08) 100%), linear-gradient(180deg, rgba(0,0,0,0.16) 0%, transparent 28%, rgba(0,0,0,0.24) 100%)",
+                  "linear-gradient(180deg, rgba(0,0,0,0.12) 0%, transparent 34%, rgba(0,0,0,0.20) 100%)",
               }}
             />
 
             <div
-              className="pointer-events-none absolute inset-0 opacity-70"
+              className="pointer-events-none absolute inset-0"
               style={{
                 background:
-                  "radial-gradient(circle at 24% 48%, color-mix(in srgb, var(--theme-page) 54%, transparent) 0%, transparent 36%), radial-gradient(circle at 78% 16%, rgba(255,255,255,0.16) 0%, transparent 34%)",
+                  "linear-gradient(90deg, rgba(0,0,0,0.10) 0%, transparent 18%, transparent 82%, rgba(0,0,0,0.12) 100%)",
               }}
             />
 
-            <div className="relative flex min-h-[500px] items-center justify-center px-5 py-16 sm:min-h-[560px] sm:justify-start sm:px-16 lg:px-24">
+            <div className="relative flex min-h-[500px] items-center justify-center px-5 py-16 sm:min-h-[560px] sm:px-16 lg:px-24">
               <motion.div
-                variants={fadeUp}
+                variants={noteReveal}
                 className="origin-center scale-[0.92] sm:scale-100"
               >
                 <HeroNoteReplica />

@@ -1,8 +1,7 @@
 "use client";
 
 import type { CSSProperties } from "react";
-import { useRef } from "react";
-import { useInView, useReducedMotion } from "framer-motion";
+import { useReducedMotion } from "framer-motion";
 import { MeshGradient } from "@paper-design/shaders-react";
 import { useSiteTheme } from "@/components/SiteThemeProvider";
 
@@ -17,13 +16,11 @@ export default function HeroShader({
   style?: CSSProperties;
 }) {
   const { theme } = useSiteTheme();
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(wrapperRef, { margin: "20% 0px 20% 0px" });
   const shouldReduceMotion = useReducedMotion();
-  const speed = shouldReduceMotion || !isInView ? 0 : 1.0;
+  const speed = shouldReduceMotion ? 0 : 1.0;
 
   return (
-    <div ref={wrapperRef} className={className} style={style}>
+    <div className={className} style={style}>
       <MeshGradient
         className="h-full w-full"
         colors={theme === "light" ? lightShaderColors : darkShaderColors}

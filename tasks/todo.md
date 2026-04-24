@@ -31,6 +31,7 @@
 - [x] Restored the sticky nav liquid-glass transparency and theme-aware hover states.
 - [x] Isolated the hero note paint layer and removed light-mode dark sheen contribution near the viewport edge.
 - [x] Changed the `With N0te` card step text to use the purple accent instead of dark text.
+- [x] Removed viewport-based shader pausing so the hero note shader stays active while scrolling.
 
 ## Verification
 - `./node_modules/.bin/tsc --noEmit`
@@ -73,6 +74,7 @@
 - Restored the sticky nav glass material before re-running verification.
 - Isolated the hero note paint layer and removed the light-mode black radial sheen before re-running verification.
 - Updated `With N0te` card step text color before re-running verification.
+- Removed viewport-based shader pausing before re-running verification.
 
 ## Result
 - Lenis is mounted globally with reduced-motion handling and anchor support.
@@ -96,3 +98,4 @@
 - Sticky nav uses a more transparent liquid-glass surface again, with tokenized text, dividers, and hover states.
 - Light-mode note rendering no longer includes an internal dark radial sheen and is explicitly clipped/contained to avoid edge darkening.
 - `With N0te` card body copy now reads as purple/accented instead of black in light mode.
+- Hero note shader no longer snaps to a stopped state at viewport edges; it only stops for reduced-motion users.

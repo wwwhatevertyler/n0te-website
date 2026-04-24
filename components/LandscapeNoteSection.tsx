@@ -1,7 +1,9 @@
 "use client";
 
+import type { CSSProperties } from "react";
+import { useRef } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import HeroNoteReplica from "@/components/HeroNoteReplica";
 import { EASE_OUT_SOFT, REVEAL_VIEWPORT } from "@/lib/motion";
 
@@ -33,9 +35,30 @@ const noteReveal = {
   },
 };
 
+const landscapeNoteVars = {
+  "--note-surface":
+    "linear-gradient(180deg, color-mix(in srgb, var(--theme-page) 78%, rgba(255,255,255,0.72)) 0%, color-mix(in srgb, var(--theme-page) 70%, rgba(255,255,255,0.62)) 100%)",
+  "--note-border": "color-mix(in srgb, var(--theme-ink) 20%, rgba(255,255,255,0.56))",
+  "--note-shadow":
+    "inset 0 1px 0 rgba(255,255,255,0.58), inset 0 -1px 0 rgba(255,255,255,0.14), 0 20px 60px rgba(0,0,0,0.22)",
+  "--note-sheen":
+    "linear-gradient(115deg, rgba(255,255,255,0.42), rgba(255,255,255,0.12) 34%, transparent 58%), radial-gradient(circle at 72% 12%, rgba(255,255,255,0.26), transparent 34%), radial-gradient(circle at 20% 82%, rgba(255,255,255,0.16), transparent 52%)",
+  "--note-placeholder": "color-mix(in srgb, var(--theme-ink) 54%, transparent)",
+  "--note-title": "color-mix(in srgb, var(--theme-ink) 40%, transparent)",
+} as CSSProperties;
+
 export default function LandscapeNoteSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const shouldReduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "center center"],
+  });
+  const scrollScale = useTransform(scrollYProgress, [0, 1], [1.12, 1]);
+  const imageScale = shouldReduceMotion ? 1 : scrollScale;
+
   return (
-    <section className="relative px-6 pb-28">
+    <section ref={sectionRef} className="relative px-6 pb-28">
       <motion.div
         variants={section}
         initial="hidden"
@@ -53,17 +76,19 @@ export default function LandscapeNoteSection() {
           }}
         >
           <div className="relative min-h-[500px] sm:min-h-[560px]">
-            <Image
-              src="/images/n0te-landscape-waterfall.jpg"
-              alt="Mountain landscape with waterfall"
-              fill
-              priority={false}
-              sizes="(min-width: 1280px) 1120px, calc(100vw - 48px)"
-              className="object-cover"
-              style={{
-                objectPosition: "62% 50%",
-              }}
-            />
+            <motion.div className="absolute inset-0" style={{ scale: imageScale }}>
+              <Image
+                src="/images/n0te-landscape-waterfall.jpg"
+                alt="Mountain landscape with waterfall"
+                fill
+                priority={false}
+                sizes="(min-width: 1280px) 1120px, calc(100vw - 48px)"
+                className="object-cover"
+                style={{
+                  objectPosition: "62% 50%",
+                }}
+              />
+            </motion.div>
 
             <div
               className="pointer-events-none absolute inset-0"
@@ -84,8 +109,18 @@ export default function LandscapeNoteSection() {
             <div className="relative flex min-h-[500px] items-center justify-center px-5 py-16 sm:min-h-[560px] sm:px-16 lg:px-24">
               <motion.div
                 variants={noteReveal}
-                className="origin-center scale-[0.92] sm:scale-100"
+                className="relative origin-center"
+                style={landscapeNoteVars}
               >
+                <div
+                  className="pointer-events-none absolute inset-0 rounded-[38px]"
+                  style={{
+                    backdropFilter: "blur(30px) saturate(1.35) brightness(1.06)",
+                    WebkitBackdropFilter: "blur(30px) saturate(1.35) brightness(1.06)",
+                    background:
+                      "linear-gradient(180deg, rgba(255,255,255,0.30), rgba(255,255,255,0.16))",
+                  }}
+                />
                 <HeroNoteReplica />
               </motion.div>
             </div>

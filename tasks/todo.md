@@ -35,6 +35,7 @@
 - [x] Removed viewport-sensitive backdrop blur from the hero note and softened the light-mode lower inset.
 - [x] Moved the Pexels landscape into `public/images` and added an editorial note-over-landscape section.
 - [x] Centered the landscape note, removed the left-side wash, and added a sharper scroll reveal.
+- [x] Added scroll-linked image zoom and a stronger landscape-only liquid glass note material.
 
 ## Verification
 - `./node_modules/.bin/tsc --noEmit`
@@ -81,6 +82,7 @@
 - Removed hero note `backdrop-filter` and softened the light-mode bottom inset before re-running verification.
 - Added the landscape note section before re-running verification.
 - Polished the landscape section note placement and reveal animation before re-running verification.
+- Added landscape image scroll zoom and stronger note glass material before re-running verification.
 
 ## Result
 - Lenis is mounted globally with reduced-motion handling and anchor support.
@@ -108,3 +110,4 @@
 - Hero note uses stable internal material layers instead of viewport-sensitive backdrop blur, preventing edge darkening while scrolling.
 - A mid-page landscape band now uses the Pexels image with the stable note preview overlaid.
 - Landscape note now sits centered over the image and enters with a short opacity/scale reveal without a left-side light wash.
+- Landscape image now eases from a slight zoom into place on scroll, while the overlaid note has a denser frosted glass shell.

@@ -79,6 +79,7 @@
 - [x] Moved the footer into the same constrained scenic frame pattern as the middle landscape section while preserving the footer note and content behavior.
 - [x] Simplified the footer into a shorter scenic closing panel, replaced the footer note with a compact shared theme toggle chip, and reset footer links to Features/Pricing/Download/Contact.
 - [x] Removed the global smooth-scroll wrapper, centralized website downloads onto one public GitHub Release URL, and rewrote App Store-specific website copy for direct macOS download.
+- [x] Restored native elastic top/bottom overscroll by removing the global `overscroll-behavior-y: none` clamp while keeping the Lenis wrapper unmounted.
 
 ## Verification
 - `./node_modules/.bin/tsc --noEmit`
@@ -193,6 +194,8 @@
 - Published `https://github.com/wwwhatevertyler/n0te-releases/releases/tag/v0.1.0-beta.1` with the `N0te.zip` release asset.
 - Re-ran `./node_modules/.bin/tsc --noEmit` after removing SmoothScroll and swapping the website to the public GitHub Release download URL.
 - Re-ran `npm run build` after removing SmoothScroll and swapping the website to the public GitHub Release download URL.
+- Re-ran `./node_modules/.bin/tsc --noEmit` after restoring native elastic overscroll.
+- Re-ran `npm run build` after restoring native elastic overscroll.
 
 ## Result
 - Lenis is mounted globally with reduced-motion handling and anchor support.

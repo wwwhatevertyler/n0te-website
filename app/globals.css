@@ -97,7 +97,6 @@
 html {
   background: var(--theme-page);
   color: var(--theme-ink);
-  overscroll-behavior-y: none;
   scroll-padding-top: 88px;
 }
 

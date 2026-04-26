@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import SiteThemeToggle from "@/components/SiteThemeToggle";
-
-const APP_STORE_URL = "https://apps.apple.com/app/id6743557889";
+import { DOWNLOAD_URL } from "@/lib/download";
 
 export default function Footer() {
   return (
@@ -77,7 +76,7 @@ export default function Footer() {
                     Pricing
                   </a>
                   <a
-                    href={APP_STORE_URL}
+                    href={DOWNLOAD_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="footer-stage-link text-[13px] transition-colors"

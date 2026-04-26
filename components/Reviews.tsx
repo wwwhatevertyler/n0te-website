@@ -101,7 +101,7 @@ export default function Reviews() {
             variants={headingItem}
             className="mt-4 text-[15px] text-white/45"
           >
-            Available on the Mac App Store.
+            Available now as a direct macOS download.
           </motion.p>
         </motion.div>
 

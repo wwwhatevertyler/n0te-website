@@ -78,6 +78,7 @@
 - [x] Replaced the mixed `calc()` footer note position animation with a same-unit percent MotionValue so the blur-safe entrance can visibly interpolate.
 - [x] Moved the footer into the same constrained scenic frame pattern as the middle landscape section while preserving the footer note and content behavior.
 - [x] Simplified the footer into a shorter scenic closing panel, replaced the footer note with a compact shared theme toggle chip, and reset footer links to Features/Pricing/Download/Contact.
+- [x] Removed the global smooth-scroll wrapper, centralized website downloads onto one public GitHub Release URL, and rewrote App Store-specific website copy for direct macOS download.
 
 ## Verification
 - `./node_modules/.bin/tsc --noEmit`
@@ -188,6 +189,10 @@
 - Re-ran `npm run build` after moving the footer into the constrained scenic container.
 - Re-ran `./node_modules/.bin/tsc --noEmit` after simplifying the footer structure and extracting the shared theme toggle.
 - Re-ran `npm run build` after simplifying the footer structure and extracting the shared theme toggle.
+- Built the native app with `/Users/whatevertyler/N0te/scripts/build-app.sh` and packaged `/tmp/N0te.zip` for public download.
+- Published `https://github.com/wwwhatevertyler/n0te-releases/releases/tag/v0.1.0-beta.1` with the `N0te.zip` release asset.
+- Re-ran `./node_modules/.bin/tsc --noEmit` after removing SmoothScroll and swapping the website to the public GitHub Release download URL.
+- Re-ran `npm run build` after removing SmoothScroll and swapping the website to the public GitHub Release download URL.
 
 ## Result
 - Lenis is mounted globally with reduced-motion handling and anchor support.

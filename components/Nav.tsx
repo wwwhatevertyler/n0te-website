@@ -4,9 +4,8 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Magnetic from "@/components/Magnetic";
+import { DOWNLOAD_URL } from "@/lib/download";
 import { EASE_OUT_SOFT, PRESS_TRANSITION } from "@/lib/motion";
-
-const APP_STORE_URL = "https://apps.apple.com/app/id6743557889";
 
 export default function Nav() {
   const [isFooterActive, setIsFooterActive] = useState(false);
@@ -116,7 +115,7 @@ export default function Nav() {
         {/* CTA */}
         <Magnetic>
           <motion.a
-            href={APP_STORE_URL}
+            href={DOWNLOAD_URL}
             target="_blank"
             rel="noopener noreferrer"
             data-footer-active={isFooterActive ? "true" : "false"}

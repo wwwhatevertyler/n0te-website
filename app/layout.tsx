@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Jura } from "next/font/google";
 import "./globals.css";
 import { SiteThemeProvider } from "@/components/SiteThemeProvider";
-import SmoothScroll from "@/components/SmoothScroll";
 import ThemeBootScript from "@/components/ThemeBootScript";
 
 const jura = Jura({
@@ -14,11 +13,11 @@ const jura = Jura({
 export const metadata: Metadata = {
   title: "N0te — Capture before the thought disappears.",
   description:
-    "N0te is a floating note for macOS that sends clean Markdown into Obsidian without pulling you out of flow. Free on the Mac App Store.",
+    "N0te is a floating note for macOS that sends clean Markdown into Obsidian without pulling you out of flow. Available as an early direct download for macOS.",
   openGraph: {
     title: "N0te — Capture before the thought disappears.",
     description:
-      "A floating note for macOS that sends clean Markdown into Obsidian without pulling you out of flow.",
+      "A floating note for macOS that sends clean Markdown into Obsidian without pulling you out of flow. Available as an early direct download for macOS.",
     type: "website",
     images: [{ url: "/images/icon.png", width: 1024, height: 1024 }],
   },
@@ -26,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary",
     title: "N0te — Capture before the thought disappears.",
     description:
-      "A floating note for macOS that sends clean Markdown into Obsidian without pulling you out of flow.",
+      "A floating note for macOS that sends clean Markdown into Obsidian without pulling you out of flow. Available as an early direct download for macOS.",
     images: ["/images/icon.png"],
   },
 };
@@ -41,7 +40,7 @@ export default function RootLayout({
       <body suppressHydrationWarning className="min-h-full bg-bg text-fg">
         <ThemeBootScript />
         <SiteThemeProvider>
-          <SmoothScroll>{children}</SmoothScroll>
+          {children}
         </SiteThemeProvider>
       </body>
     </html>

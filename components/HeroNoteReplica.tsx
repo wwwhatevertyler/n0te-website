@@ -2,10 +2,9 @@
 
 import type { CSSProperties, ReactNode } from "react";
 import { motion } from "framer-motion";
-import Magnetic from "@/components/Magnetic";
 import HeroShader from "@/components/HeroShader";
+import SiteThemeToggle from "@/components/SiteThemeToggle";
 import { EASE_OUT_SOFT } from "@/lib/motion";
-import { type SiteTheme, useSiteTheme } from "@/components/SiteThemeProvider";
 
 const noteFrameStyle: CSSProperties = {
   width: 300,
@@ -14,9 +13,11 @@ const noteFrameStyle: CSSProperties = {
   clipPath: "inset(0 round 38px)",
   background: "var(--note-surface)",
   backgroundClip: "padding-box",
+  backdropFilter: "var(--note-backdrop-filter, none)",
+  WebkitBackdropFilter: "var(--note-backdrop-filter, none)",
   border: "0.7px solid var(--note-border)",
   boxShadow: "var(--note-shadow)",
-  contain: "paint",
+  contain: "var(--note-contain, paint)",
   isolation: "isolate",
 };
 
@@ -86,67 +87,6 @@ function MicIcon() {
   );
 }
 
-function ThemeToggle() {
-  const { theme, setTheme } = useSiteTheme();
-
-  function switchTheme(nextTheme?: SiteTheme) {
-    setTheme(nextTheme ?? (theme === "dark" ? "light" : "dark"));
-  }
-
-  return (
-    <Magnetic maxOffset={3.5} influence={0.14}>
-      <button
-        type="button"
-        aria-label={theme === "dark" ? "Switch website to light mode" : "Switch website to dark mode"}
-        aria-pressed={theme === "light"}
-        className="flex items-center rounded-full"
-        onClick={() => switchTheme()}
-        style={{
-          width: 58,
-          height: 24,
-          padding: "0 3px",
-          background: "var(--note-control-fill)",
-          border: "0.5px solid var(--note-control-border)",
-          boxShadow: "inset 0 1px 0 var(--note-control-highlight)",
-        }}
-      >
-        <span
-          className="grid h-5 w-[26px] place-items-center rounded-full transition duration-150"
-          style={{
-            background: theme === "light" ? "var(--note-toggle-active)" : "transparent",
-            color: theme === "light" ? "var(--note-toggle-active-icon)" : "var(--note-toggle-icon)",
-          }}
-        >
-          <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-            <circle cx="6" cy="6" r="2" fill="currentColor" />
-            <path
-              d="M6 1.4v1.2M6 9.4v1.2M1.4 6h1.2M9.4 6h1.2M2.75 2.75l.85.85M8.4 8.4l.85.85M9.25 2.75l-.85.85M3.6 8.4l-.85.85"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeWidth="0.9"
-            />
-          </svg>
-        </span>
-
-        <span
-          className="grid h-5 w-[26px] place-items-center rounded-full transition duration-150"
-          style={{
-            background: theme === "dark" ? "var(--note-toggle-active)" : "transparent",
-            color: theme === "dark" ? "var(--note-toggle-active-icon)" : "var(--note-toggle-icon)",
-          }}
-        >
-          <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-            <path
-              d="M9.9 7.2A4.45 4.45 0 0 1 4.8 2.1a4.7 4.7 0 1 0 5.1 5.1Z"
-              fill="currentColor"
-            />
-          </svg>
-        </span>
-      </button>
-    </Magnetic>
-  );
-}
-
 function ObsidianExportIcon() {
   return (
     <div className="grid place-items-center" style={{ width: 24, height: 24 }}>
@@ -176,22 +116,32 @@ function PlusIcon() {
   );
 }
 
-export default function HeroNoteReplica() {
+export default function HeroNoteReplica({
+  animateOnMount = true,
+  showShader = true,
+  title = "Mineral Horizon",
+}: {
+  animateOnMount?: boolean;
+  showShader?: boolean;
+  title?: string;
+}) {
   return (
     <motion.div
       aria-label="Interactive N0te preview"
-      initial={{ opacity: 0, scale: 0.97, y: 20 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      transition={{ delay: 0.36, duration: 0.9, ease: EASE_OUT_SOFT }}
+      initial={animateOnMount ? { opacity: 0, scale: 0.97, y: 20 } : false}
+      animate={animateOnMount ? { opacity: 1, scale: 1, y: 0 } : undefined}
+      transition={animateOnMount ? { delay: 0.36, duration: 0.9, ease: EASE_OUT_SOFT } : undefined}
       className="group relative select-none"
     >
       <div className="relative overflow-hidden" style={noteFrameStyle}>
-        <HeroShader
-          className="pointer-events-none absolute inset-0"
-          style={{
-            opacity: 0.58,
-          }}
-        />
+        {showShader ? (
+          <HeroShader
+            className="pointer-events-none absolute inset-0"
+            style={{
+              opacity: 0.58,
+            }}
+          />
+        ) : null}
 
         <div
           className="pointer-events-none absolute inset-0"
@@ -212,7 +162,7 @@ export default function HeroNoteReplica() {
             </div>
 
             <div className="absolute left-1/2 top-0 -translate-x-1/2 scale-[0.96] opacity-0 transition duration-150 ease-[var(--ease-out)] group-hover:scale-100 group-hover:opacity-100 focus-within:scale-100 focus-within:opacity-100">
-              <ThemeToggle />
+              <SiteThemeToggle variant="note" />
             </div>
 
             <div className="absolute right-0 top-0 flex" style={{ gap: 8 }}>
@@ -254,7 +204,7 @@ export default function HeroNoteReplica() {
                 letterSpacing: 0,
               }}
             >
-              Mineral Horizon
+              {title}
             </div>
           </div>
         </div>

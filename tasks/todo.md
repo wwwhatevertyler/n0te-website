@@ -37,6 +37,47 @@
 - [x] Centered the landscape note, removed the left-side wash, and added a sharper scroll reveal.
 - [x] Added scroll-linked image zoom and a stronger landscape-only liquid glass note material.
 - [x] Removed the landscape note reveal so the note is present immediately.
+- [x] Reverted the landscape note to the exact hero note preview and reversed the image zoom direction.
+- [x] Restored a blur-only liquid glass substrate behind the landscape note.
+- [x] Delayed and softened the landscape image zoom while giving the image band a little more outer space.
+- [x] Removed the landscape note shadow while keeping the blur substrate behind it.
+- [x] Removed the landscape note shader while keeping the blur substrate behind it.
+- [x] Changed the landscape image scroll motion to zoom in through the center of the section and return to rest as it exits.
+- [x] Swapped the middle scenic band to the tighter waterfall image and rebuilt the footer as a sticky image reveal beneath the main page.
+- [x] Flattened the scenic footer back into a normal section while keeping the image-backed treatment.
+- [x] Tightened the footer ending and made the floating nav spring into a docked end-state over the footer with a primary download button.
+- [x] Converted the footer into a full-viewport image stage and recalibrated docking around that stage so no black band remains below the image.
+- [x] Lowered the footer dock target and trimmed the footer bottom spacing so the nav sits closer to the bottom edge in the final state.
+- [x] Restored footer breathing room under the text and moved the nav's final dock stop substantially higher.
+- [x] Switched the middle scenic section back to the original waterfall image, removed the footer bubble, and aligned nav docking to the actual footer divider line.
+- [x] Removed footer-specific nav docking so the primary floating nav stays in one consistent position and style throughout the page.
+- [x] Restored a footer-triggered primary CTA state on the nav download button while keeping the nav itself fixed.
+- [x] Added a third shared note preview into the footer image stage to mirror the reference composition.
+- [x] Lowered the footer note preview, restored its pointer events, and added footer-scoped light-mode note contrast.
+- [x] Replaced hard-coded footer text colors with footer-scoped light/dark theme tokens.
+- [x] Removed the visible nav shell rim by making nav shell stroke/highlight tokens transparent.
+- [x] Restored footer text to light-on-image tokens in both site themes.
+- [x] Added a scroll-linked z-axis style entrance for the footer note preview.
+- [x] Restored the footer note blur material and hover behavior while keeping the later scroll entrance.
+- [x] Rebuilt the footer note entrance so the glass substrate stays stable while the note content eases in late with springed scroll motion.
+- [x] Reverted the footer note entrance to the faster earlier scroll window with reduced travel/scale, and pinned its material tokens to the dark scenic note treatment.
+- [x] Extracted the shared scenic note preview so the middle landscape note and footer note use the same blur/material wrapper.
+- [x] Removed the footer-only light-mode note override and retimed the footer note to finish scaling at the page end.
+- [x] Restored the footer note opacity animation and added scenic backdrop blur to the actual note frame.
+- [x] Strengthened the shared scenic note glass surface and made the footer note opacity complete early while preserving its movement timing.
+- [x] Replaced scenic note material with the floating nav glass recipe and removed the extra scenic substrate layer.
+- [x] Restored the shared scenic note wrapper to the earlier middle-section material stack and blur substrate.
+- [x] Tightened the footer note opacity ramp so the material becomes fully opaque almost immediately while y/scale timing stays unchanged.
+- [x] Decoupled the middle scenic note from the footer note and restored the middle note to its previous material recipe.
+- [x] Temporarily removed the footer note entrance animation to debug whether motion compositing is affecting the glass material.
+- [x] Switched the footer note to the same frame-level blur material recipe as the good middle note and raised its footer layer above the footer content.
+- [x] Restored the liked footer note scroll entrance on top of the corrected material path.
+- [x] Captured the footer note debugging lesson in shared agent memory.
+- [x] Backtracked the footer note entrance to position-only scroll motion so no opacity or transform touches the glass layer.
+- [x] Increased the blur-safe footer note travel distance so the position-only entrance reads as visible motion.
+- [x] Replaced the mixed `calc()` footer note position animation with a same-unit percent MotionValue so the blur-safe entrance can visibly interpolate.
+- [x] Moved the footer into the same constrained scenic frame pattern as the middle landscape section while preserving the footer note and content behavior.
+- [x] Simplified the footer into a shorter scenic closing panel, replaced the footer note with a compact shared theme toggle chip, and reset footer links to Features/Pricing/Download/Contact.
 
 ## Verification
 - `./node_modules/.bin/tsc --noEmit`
@@ -85,6 +126,68 @@
 - Polished the landscape section note placement and reveal animation before re-running verification.
 - Added landscape image scroll zoom and stronger note glass material before re-running verification.
 - Removed the landscape note reveal animation before re-running verification.
+- Restored the landscape note to the hero version and reversed image zoom before re-running verification.
+- Restored the blur-only landscape note substrate before re-running verification.
+- Delayed and softened the landscape zoom before re-running verification.
+- Removed the landscape note shadow before re-running verification.
+- Removed the landscape note shader before re-running verification.
+- Changed the landscape image zoom to a center-peaking in-and-out scroll curve before re-running verification.
+- Swapped the middle scenic image and rebuilt the footer as a below-page scenic reveal before re-running verification.
+- Flattened the scenic footer back into a normal section before re-running verification.
+- Tightened the footer bottom and added nav docking behavior before re-running verification.
+- Converted the footer to a full-viewport closing stage and re-tuned nav docking before re-running verification.
+- Lowered the final dock position and reduced footer bottom padding before re-running verification.
+- Restored footer bottom spacing and shifted the nav dock stop higher before re-running verification.
+- Restored the original scenic image, removed the footer bubble, and tied nav docking to the divider line before re-running verification.
+- Removed footer-specific nav motion/state changes before re-running verification.
+- Reintroduced footer-triggered CTA emphasis on the nav download button before re-running verification.
+- Added the footer note preview using the shared note component before re-running verification.
+- Lowered the footer note preview and restored footer toggle hit testing before re-running verification.
+- Re-ran `./node_modules/.bin/tsc --noEmit`.
+- Re-ran `npm run build`.
+- Confirmed the fresh dev server responded at `http://127.0.0.1:3100` when run outside the network sandbox.
+- Browser automation note: Python Playwright is not installed in this environment, and the temporary Playwright CLI does not expose a scriptable `playwright` module to Node.
+- Browser screenshot note: the temporary Playwright CLI is present, but its Chromium browser binary is not installed in `~/Library/Caches/ms-playwright`.
+- Re-ran `./node_modules/.bin/tsc --noEmit` after replacing footer text colors with theme tokens.
+- Re-ran `npm run build` after replacing footer text colors with theme tokens.
+- Re-ran `./node_modules/.bin/tsc --noEmit` after removing the nav shell rim and restoring footer image contrast.
+- Re-ran `npm run build` after removing the nav shell rim and restoring footer image contrast.
+- Re-ran `./node_modules/.bin/tsc --noEmit` after adding the footer note scroll entrance.
+- Re-ran `npm run build` after adding the footer note scroll entrance.
+- Re-ran `./node_modules/.bin/tsc --noEmit` after removing the footer note parent filter and restoring pointer pass-through.
+- Re-ran `npm run build` after removing the footer note parent filter and restoring pointer pass-through.
+- Re-ran `./node_modules/.bin/tsc --noEmit` after stabilizing the footer note glass substrate and springing the late entrance.
+- Re-ran `npm run build` after stabilizing the footer note glass substrate and springing the late entrance.
+- Re-ran `./node_modules/.bin/tsc --noEmit` after restoring the faster footer note entrance and dark scenic material tokens.
+- Re-ran `npm run build` after restoring the faster footer note entrance and dark scenic material tokens.
+- Re-ran `./node_modules/.bin/tsc --noEmit` after extracting the shared scenic note preview and removing footer-only note styling.
+- Re-ran `npm run build` after extracting the shared scenic note preview and removing footer-only note styling.
+- Re-ran `./node_modules/.bin/tsc --noEmit` after restoring footer opacity and adding scenic note-frame backdrop blur.
+- Re-ran `npm run build` after restoring footer opacity and adding scenic note-frame backdrop blur.
+- Re-ran `./node_modules/.bin/tsc --noEmit` after strengthening the scenic note material and early opacity curve.
+- Re-ran `npm run build` after strengthening the scenic note material and early opacity curve.
+- Re-ran `./node_modules/.bin/tsc --noEmit` after replacing scenic note material with the nav glass recipe.
+- Re-ran `npm run build` after replacing scenic note material with the nav glass recipe.
+- Re-ran `./node_modules/.bin/tsc --noEmit` after restoring the middle scenic note material wrapper.
+- Re-ran `npm run build` after restoring the middle scenic note material wrapper.
+- Re-ran `./node_modules/.bin/tsc --noEmit` after decoupling the middle scenic note styling from the footer note.
+- Re-ran `npm run build` after decoupling the middle scenic note styling from the footer note.
+- Re-ran `./node_modules/.bin/tsc --noEmit` after removing the footer note animation for the static debug pass.
+- Re-ran `npm run build` after removing the footer note animation for the static debug pass.
+- Re-ran `./node_modules/.bin/tsc --noEmit` after moving the footer note to the frame-level middle note material.
+- Re-ran `npm run build` after moving the footer note to the frame-level middle note material.
+- Re-ran `./node_modules/.bin/tsc --noEmit` after restoring the footer note scroll entrance.
+- Re-ran `npm run build` after restoring the footer note scroll entrance.
+- Re-ran `./node_modules/.bin/tsc --noEmit` after changing footer note motion to absolute `top` only.
+- Re-ran `npm run build` after changing footer note motion to absolute `top` only.
+- Re-ran `./node_modules/.bin/tsc --noEmit` after increasing the position-only footer note travel distance.
+- Re-ran `npm run build` after increasing the position-only footer note travel distance.
+- Re-ran `./node_modules/.bin/tsc --noEmit` after switching the footer note to same-unit percent position animation.
+- Re-ran `npm run build` after switching the footer note to same-unit percent position animation.
+- Re-ran `./node_modules/.bin/tsc --noEmit` after moving the footer into the constrained scenic container.
+- Re-ran `npm run build` after moving the footer into the constrained scenic container.
+- Re-ran `./node_modules/.bin/tsc --noEmit` after simplifying the footer structure and extracting the shared theme toggle.
+- Re-ran `npm run build` after simplifying the footer structure and extracting the shared theme toggle.
 
 ## Result
 - Lenis is mounted globally with reduced-motion handling and anchor support.
@@ -114,3 +217,38 @@
 - Landscape note now sits centered over the image and enters with a short opacity/scale reveal without a left-side light wash.
 - Landscape image now eases from a slight zoom into place on scroll, while the overlaid note has a denser frosted glass shell.
 - Landscape note now renders immediately while the background image keeps its scroll zoom.
+- Landscape section now uses the exact hero note preview with no custom note shell, and the background zoom now grows in as you scroll.
+- Landscape note now has a subtle blur substrate behind the exact hero note preview.
+- Landscape band now sits with slightly more page margin, and the image zoom starts later with a smaller scale range.
+- Landscape note now sits over the blur substrate without the inherited shadow treatment.
+- Landscape note now uses the exact hero note shell without the internal shader, so only the blur substrate provides the glass smear over the image.
+- Landscape image now zooms in as the section settles into view and eases back to its resting scale as it scrolls out.
+- The middle scenic section now uses the closer waterfall crop, and the footer now sits beneath the site as an image-backed layer that reveals from the bottom while the page slides over it.
+- The footer keeps the image-backed look but now behaves as a standard section instead of a below-page underlay.
+- The footer ending now reads as a dock stage instead of dead space, and the floating nav springs upward into place while the download button switches into the primary CTA treatment near the end.
+- The footer image now fills the final viewport with no exposed page background below it, and the nav docks inside that image stage above the bottom dock marker.
+- The final dock state now sits lower, with less empty space below the copyright line and a nav position closer to the screenshot target.
+- The footer has its lower spacing back, and the nav now finishes much higher in the closing frame without changing the footer structure.
+- The middle scenic section uses the original waterfall image again, the footer bubble is gone, and the nav now docks to the actual divider line instead of an approximate fixed offset.
+- The nav now remains the same fixed floating bar all the way down the page, with no footer-specific docking or CTA state change.
+- The nav stays fixed throughout the page, but the download button now shifts into the primary CTA style again when the footer reaches the final viewport zone.
+- The page now has a third note preview in the footer image stage, using the same shared note component with a footer-specific title.
+- The footer note preview now sits lower, can receive hover/click events, and has darker light-mode note text/control colors without changing the shared theme state.
+- Footer brand, body copy, link, heading, hover, and divider colors now switch through footer-specific theme tokens instead of fixed white opacity classes.
+- The floating nav shell keeps the token architecture but no longer renders a visible outer stroke/top/bottom rim.
+- Footer brand, copy, headings, links, hover states, and divider remain light over the landscape image in both light and dark site modes.
+- The footer note preview now scrolls in from a lower, smaller, blurred state and settles into place behind the footer content layer; reduced-motion users see the final static note.
+- The footer note entrance now starts later, animates only transform/opacity, and leaves the backdrop-filter substrate and interactive theme toggle intact.
+- The footer note now keeps its frosted blur layer at the final geometry while only the note content moves subtly into place, so the material stays intact and the hoverable theme toggle remains usable.
+- The footer note now moves as one material object again, using the earlier scroll trigger with a milder `72px`/`0.94` entrance and dark scenic note tokens that match the middle landscape preview.
+- The middle scenic note and footer note now share one `ScenicNotePreview` component, and the footer note reaches full scale only at the end-based footer scroll range.
+- The scenic note card itself now supports a `--note-backdrop-filter` material override, so the middle and footer scenic previews blur through the actual note frame rather than relying only on the wrapper substrate.
+- The shared scenic note material now uses a denser dark glass surface and stronger backdrop filter, while footer opacity reaches full strength early so the note reads as blurred glass instead of transparent overlay.
+- The shared scenic note material now uses the floating nav glass background/filter values directly on the note frame, with `contain` disabled for scenic notes so the backdrop can sample the landscape.
+- The shared scenic note material now matches the earlier middle-section treatment again: note variables plus a dedicated rounded blur substrate under the exact note replica, with footer opacity finishing quickly to avoid a transparent-overlay read.
+- The middle scenic note is now isolated from footer note experiments and restored to its prior nav-glass-style note material while the footer keeps its separate `ScenicNotePreview` path.
+- The footer note is temporarily static at its final position with no opacity, scale, y, or will-change animation, so the remaining glass issue can be evaluated without scroll-motion compositing.
+- The footer note now uses frame-level backdrop blur and material variables matching the middle note, and its layer sits above the footer content to rule out the previous z-index suspicion.
+- The footer note scroll entrance is restored with the corrected material path: late footer range, subtle y/scale movement, quick opacity completion, reduced-motion final state, and `z-30` layering.
+- The footer note entrance now moves by absolute `top` only, from `calc(22% + 56px)` to `22%`, preserving the corrected glass material by avoiding opacity, scale, translate, perspective, and `will-change` on the note ancestry.
+- The footer note now moves by absolute `top` from `calc(22% + 220px)` to `22%`, making the blur-safe entrance more visible without reintroducing transform or opacity compositing.

@@ -2,14 +2,56 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import Magnetic from "@/components/Magnetic";
 import { EASE_OUT_SOFT, PRESS_TRANSITION } from "@/lib/motion";
 
 const APP_STORE_URL = "https://apps.apple.com/app/id6743557889";
 
 export default function Nav() {
+  const [isFooterActive, setIsFooterActive] = useState(false);
+
+  useEffect(() => {
+    let frame = 0;
+
+    const updateFooterState = () => {
+      frame = 0;
+      const footer = document.querySelector<HTMLElement>("[data-footer-dock]");
+      if (!footer) {
+        setIsFooterActive(false);
+        return;
+      }
+
+      const rect = footer.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const isActive = rect.top <= viewportHeight * 0.44;
+
+      setIsFooterActive((current) => (current !== isActive ? isActive : current));
+    };
+
+    const onScroll = () => {
+      if (frame) {
+        return;
+      }
+
+      frame = window.requestAnimationFrame(updateFooterState);
+    };
+
+    updateFooterState();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+
+    return () => {
+      if (frame) {
+        window.cancelAnimationFrame(frame);
+      }
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
   return (
-    <div className="fixed bottom-10 left-0 right-0 z-50 flex justify-center pointer-events-none">
+    <div className="fixed bottom-6 left-0 right-0 z-50 flex justify-center pointer-events-none sm:bottom-8">
       <motion.nav
         initial={{ opacity: 0, y: 18, scale: 0.985 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -20,9 +62,9 @@ export default function Nav() {
             "linear-gradient(135deg, color-mix(in srgb, var(--theme-ink) 10%, transparent), color-mix(in srgb, var(--theme-page) 28%, transparent) 45%, color-mix(in srgb, var(--theme-ink) 5%, transparent)), color-mix(in srgb, var(--theme-page) 38%, transparent)",
           backdropFilter: "blur(44px) saturate(1.9) brightness(1.08)",
           WebkitBackdropFilter: "blur(44px) saturate(1.9) brightness(1.08)",
-          border: "0.7px solid color-mix(in srgb, var(--theme-ink) 14%, transparent)",
+          border: "0.7px solid var(--nav-shell-border)",
           boxShadow:
-            "0 18px 52px rgba(0,0,0,0.18), inset 0 1px 0 color-mix(in srgb, var(--theme-ink) 18%, transparent), inset 0 -1px 0 color-mix(in srgb, var(--theme-page) 34%, transparent)",
+            "0 18px 52px rgba(0,0,0,0.18), inset 0 1px 0 var(--nav-shell-highlight-top), inset 0 -1px 0 var(--nav-shell-highlight-bottom)",
         }}
       >
         {/* Logo */}
@@ -77,13 +119,24 @@ export default function Nav() {
             href={APP_STORE_URL}
             target="_blank"
             rel="noopener noreferrer"
+            data-footer-active={isFooterActive ? "true" : "false"}
             whileHover={{ y: -1, scale: 1.02 }}
             whileTap={{ scale: 0.96 }}
             transition={PRESS_TRANSITION}
-            className="nav-glass-cta inline-flex items-center gap-1.5 text-[12.5px] font-medium px-3.5 py-1.5 rounded-xl transition-colors duration-200"
+            className="nav-glass-cta inline-flex items-center gap-1.5 rounded-xl px-3.5 py-1.5 text-[12.5px] font-medium transition-[background-color,color,box-shadow,border-color] duration-200"
             style={{
-              background: "color-mix(in srgb, var(--theme-ink) 9%, transparent)",
-              border: "0.7px solid color-mix(in srgb, var(--theme-ink) 12%, transparent)",
+              background: isFooterActive
+                ? "var(--theme-cta-bg)"
+                : "color-mix(in srgb, var(--theme-ink) 9%, transparent)",
+              border: isFooterActive
+                ? "0.7px solid color-mix(in srgb, var(--theme-cta-bg) 72%, transparent)"
+                : "0.7px solid color-mix(in srgb, var(--theme-ink) 12%, transparent)",
+              color: isFooterActive
+                ? "var(--theme-cta-fg)"
+                : "color-mix(in srgb, var(--theme-ink) 82%, transparent)",
+              boxShadow: isFooterActive
+                ? "inset 0 1px 0 color-mix(in srgb, white 26%, transparent)"
+                : "inset 0 1px 0 color-mix(in srgb, var(--theme-ink) 6%, transparent)",
             }}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">

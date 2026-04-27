@@ -1,10 +1,307 @@
 "use client";
 
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
+import {
+  type CSSProperties,
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+} from "react";
+import Magnetic from "@/components/Magnetic";
 import SiteThemeToggle from "@/components/SiteThemeToggle";
 import { DOWNLOAD_URL } from "@/lib/download";
+import { EASE_OUT, EASE_OUT_SOFT, PRESS_TRANSITION } from "@/lib/motion";
+
+const CONTACT_EMAIL = "tylermathewsuggs@gmail.com";
+const CONTACT_EXIT_TRANSITION = { duration: 0.11, ease: EASE_OUT } as const;
+
+const contactModalStyle: CSSProperties = {
+  width: "min(356px, calc(100vw - 40px))",
+  borderRadius: 30,
+  background: "var(--note-surface)",
+  backgroundClip: "padding-box",
+  backdropFilter: "blur(44px) saturate(1.85) brightness(1.08)",
+  WebkitBackdropFilter: "blur(44px) saturate(1.85) brightness(1.08)",
+  border: 0,
+  boxShadow:
+    "var(--note-shadow), 0 26px 72px rgba(0,0,0,0.28), inset 0 1px 0 color-mix(in srgb, white 8%, transparent)",
+  isolation: "isolate",
+};
+
+const chromeButtonStyle: CSSProperties = {
+  background: "var(--note-control-fill)",
+  border: "0.5px solid var(--note-control-border)",
+  boxShadow: "inset 0 1px 0 var(--note-control-highlight)",
+  color: "var(--note-control-icon)",
+};
+
+function CloseIcon() {
+  return (
+    <svg width="9" height="9" viewBox="0 0 9 9" fill="none" aria-hidden="true">
+      <path
+        d="M2.05 2.05l4.9 4.9M6.95 2.05l-4.9 4.9"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="1.5"
+      />
+    </svg>
+  );
+}
+
+function CopyIcon() {
+  return (
+    <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+      <rect
+        x="4.15"
+        y="3.15"
+        width="5.35"
+        height="5.35"
+        rx="1.35"
+        stroke="currentColor"
+        strokeWidth="1"
+      />
+      <path
+        d="M2.5 6.8V3.55C2.5 2.97 2.97 2.5 3.55 2.5H6.8"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="1"
+      />
+    </svg>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+      <path
+        d="M2.6 6.1l2.15 2.15L9.4 3.65"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.25"
+      />
+    </svg>
+  );
+}
+
+async function copyEmailToClipboard() {
+  try {
+    await navigator.clipboard.writeText(CONTACT_EMAIL);
+    return true;
+  } catch {
+    const textarea = document.createElement("textarea");
+    textarea.value = CONTACT_EMAIL;
+    textarea.setAttribute("readonly", "true");
+    textarea.style.position = "fixed";
+    textarea.style.left = "-9999px";
+    textarea.style.top = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    const copied = document.execCommand("copy");
+    textarea.remove();
+    return copied;
+  }
+}
+
+function ContactModal({
+  open,
+  onClose,
+}: {
+  open: boolean;
+  onClose: () => void;
+}) {
+  const titleId = useId();
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const copyButtonRef = useRef<HTMLButtonElement>(null);
+  const resetTimerRef = useRef<number | null>(null);
+  const reduceMotion = useReducedMotion();
+  const [copyState, setCopyState] = useState<"idle" | "copied" | "failed">("idle");
+
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+
+    setCopyState("idle");
+
+    const focusFrame = window.requestAnimationFrame(() => {
+      copyButtonRef.current?.focus({ preventScroll: true });
+    });
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        onClose();
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      window.cancelAnimationFrame(focusFrame);
+    };
+  }, [onClose, open]);
+
+  useEffect(() => {
+    return () => {
+      if (resetTimerRef.current) {
+        window.clearTimeout(resetTimerRef.current);
+      }
+    };
+  }, []);
+
+  const handleCopy = async () => {
+    if (resetTimerRef.current) {
+      window.clearTimeout(resetTimerRef.current);
+    }
+
+    const copied = await copyEmailToClipboard();
+    setCopyState(copied ? "copied" : "failed");
+
+    resetTimerRef.current = window.setTimeout(() => {
+      setCopyState("idle");
+    }, 1800);
+  };
+
+  const contentMotion = reduceMotion
+    ? {
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        exit: { opacity: 0 },
+      }
+    : {
+        initial: { opacity: 0, y: 14, scale: 0.965 },
+        animate: { opacity: 1, y: 0, scale: 1 },
+        exit: { opacity: 0, y: 8, scale: 0.985 },
+      };
+
+  return (
+    <AnimatePresence>
+      {open ? (
+        <motion.div
+          className="pointer-events-none fixed inset-0 z-[80] flex items-end justify-center px-5 pb-8 sm:items-center sm:pb-0"
+          initial={false}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={
+            reduceMotion
+              ? { opacity: 0, transition: { duration: 0 } }
+              : { opacity: 0, y: 4, scale: 0.995, transition: CONTACT_EXIT_TRANSITION }
+          }
+        >
+          <div
+            aria-labelledby={titleId}
+            className="pointer-events-auto relative overflow-hidden px-3.5 py-3.5"
+            role="dialog"
+            style={contactModalStyle}
+          >
+            <div
+              className="pointer-events-none absolute inset-0"
+              style={{ background: "var(--note-sheen)" }}
+            />
+
+            <motion.div
+              {...contentMotion}
+              transition={{ duration: reduceMotion ? 0 : 0.22, ease: EASE_OUT_SOFT }}
+              className="relative flex items-center gap-3"
+            >
+              <Magnetic className="shrink-0">
+                <motion.button
+                  ref={closeButtonRef}
+                  type="button"
+                  aria-label="Close contact modal"
+                  onClick={onClose}
+                  whileHover={reduceMotion ? undefined : { y: -1, scale: 1.02 }}
+                  whileTap={{ scale: 0.94 }}
+                  transition={PRESS_TRANSITION}
+                  className="grid h-6 w-6 shrink-0 place-items-center rounded-full"
+                  style={chromeButtonStyle}
+                >
+                  <CloseIcon />
+                </motion.button>
+              </Magnetic>
+
+              <div className="min-w-0 flex-1">
+                <p
+                  id={titleId}
+                  className="font-jura text-[10px] leading-none"
+                  style={{ color: "var(--note-title)" }}
+                >
+                  Contact
+                </p>
+                <p
+                  className="mt-1 select-all truncate font-jura text-[13px] leading-none"
+                  style={{ color: "var(--note-placeholder)" }}
+                >
+                  {CONTACT_EMAIL}
+                </p>
+              </div>
+
+              <Magnetic className="shrink-0">
+                <motion.button
+                  ref={copyButtonRef}
+                  type="button"
+                  aria-label={`Copy ${CONTACT_EMAIL}`}
+                  onClick={handleCopy}
+                  whileHover={reduceMotion ? undefined : { y: -1, scale: 1.02 }}
+                  whileTap={{ scale: 0.96 }}
+                  transition={PRESS_TRANSITION}
+                  className="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full px-3 font-jura text-[11px]"
+                  style={{
+                    ...chromeButtonStyle,
+                    color:
+                      copyState === "copied"
+                        ? "var(--n0te-accent)"
+                        : copyState === "failed"
+                          ? "color-mix(in srgb, var(--theme-ink) 64%, transparent)"
+                          : "var(--note-control-icon)",
+                  }}
+                >
+                  {copyState === "copied" ? <CheckIcon /> : <CopyIcon />}
+                  {copyState === "copied" ? "Copied" : copyState === "failed" ? "Retry" : "Copy"}
+                </motion.button>
+              </Magnetic>
+            </motion.div>
+          </div>
+        </motion.div>
+      ) : null}
+    </AnimatePresence>
+  );
+}
 
 export default function Footer() {
+  const [isContactOpen, setIsContactOpen] = useState(false);
+  const [shouldRestoreFocus, setShouldRestoreFocus] = useState(false);
+  const contactTriggerRef = useRef<HTMLButtonElement>(null);
+
+  const openContactModal = useCallback(() => {
+    setIsContactOpen(true);
+  }, []);
+
+  const closeContactModal = useCallback(() => {
+    setIsContactOpen(false);
+    setShouldRestoreFocus(true);
+  }, []);
+
+  useEffect(() => {
+    if (isContactOpen || !shouldRestoreFocus) {
+      return;
+    }
+
+    const focusFrame = window.requestAnimationFrame(() => {
+      contactTriggerRef.current?.focus({ preventScroll: true });
+      setShouldRestoreFocus(false);
+    });
+
+    return () => {
+      window.cancelAnimationFrame(focusFrame);
+    };
+  }, [isContactOpen, shouldRestoreFocus]);
+
   return (
     <footer
       data-footer-dock
@@ -83,12 +380,16 @@ export default function Footer() {
                   >
                     Download
                   </a>
-                  <a
-                    href="mailto:hello@n0teapp.com"
-                    className="footer-stage-link text-[13px] transition-colors"
+                  <button
+                    ref={contactTriggerRef}
+                    type="button"
+                    aria-haspopup="dialog"
+                    aria-expanded={isContactOpen}
+                    onClick={openContactModal}
+                    className="footer-stage-link appearance-none bg-transparent p-0 text-left text-[13px] transition-colors"
                   >
                     Contact
-                  </a>
+                  </button>
                 </div>
               </div>
 
@@ -112,6 +413,8 @@ export default function Footer() {
           </div>
         </div>
       </div>
+
+      <ContactModal open={isContactOpen} onClose={closeContactModal} />
     </footer>
   );
 }

@@ -1,6 +1,6 @@
 # N0te Visual Reference
 
-Source repo: `/Users/whatevertyler/N0te`  
+Source repo: `/Users/whatevertyler/n0te-app`
 Last synced: `2026-04-22`  
 App commit: `d398de10466b8609357cb213b685ecb098afb4ba`
 
@@ -43,23 +43,23 @@ Website hero direction from product strategy:
 
 App-side assets currently available:
 
-- `/Users/whatevertyler/N0te/Sources/N0te/Resources/n0te-app-icon-for-mac-os.png`
-- `/Users/whatevertyler/N0te/Sources/N0te/Resources/n0te-icon-for-toolbar.png`
-- `/Users/whatevertyler/N0te/Sources/N0te/Resources/n0te-icon-for-obsidian-export.png`
-- `/Users/whatevertyler/N0te/Sources/N0te/Resources/Onboarding/Frame 1.png`
-- `/Users/whatevertyler/N0te/Sources/N0te/Resources/Onboarding/Frame 2.png`
-- `/Users/whatevertyler/N0te/Sources/N0te/Resources/Onboarding/Frame 3.png`
-- `/Users/whatevertyler/N0te/Sources/N0te/Resources/Onboarding/Frame 4.png`
-- `/Users/whatevertyler/N0te/Sources/N0te/Resources/Onboarding/Frame 5.png`
+- `/Users/whatevertyler/n0te-app/Sources/N0te/Resources/n0te-app-icon-for-mac-os.png`
+- `/Users/whatevertyler/n0te-app/Sources/N0te/Resources/n0te-icon-for-toolbar.png`
+- `/Users/whatevertyler/n0te-app/Sources/N0te/Resources/n0te-icon-for-obsidian-export.png`
+- `/Users/whatevertyler/n0te-app/Sources/N0te/Resources/Onboarding/Frame 1.png`
+- `/Users/whatevertyler/n0te-app/Sources/N0te/Resources/Onboarding/Frame 2.png`
+- `/Users/whatevertyler/n0te-app/Sources/N0te/Resources/Onboarding/Frame 3.png`
+- `/Users/whatevertyler/n0te-app/Sources/N0te/Resources/Onboarding/Frame 4.png`
+- `/Users/whatevertyler/n0te-app/Sources/N0te/Resources/Onboarding/Frame 5.png`
 
 Other root-level visual references currently present in the app repo:
 
-- `/Users/whatevertyler/N0te/Frame 1.png`
-- `/Users/whatevertyler/N0te/Frame 2.png`
-- `/Users/whatevertyler/N0te/Frame 3.png`
-- `/Users/whatevertyler/N0te/Frame 4.png`
-- `/Users/whatevertyler/N0te/Frame 5.png`
-- `/Users/whatevertyler/N0te/new-logo-for-n0te-3.png`
+- `/Users/whatevertyler/n0te-app/Frame 1.png`
+- `/Users/whatevertyler/n0te-app/Frame 2.png`
+- `/Users/whatevertyler/n0te-app/Frame 3.png`
+- `/Users/whatevertyler/n0te-app/Frame 4.png`
+- `/Users/whatevertyler/n0te-app/Frame 5.png`
+- `/Users/whatevertyler/n0te-app/new-logo-for-n0te-3.png`
 
 Use these as source references. Do not treat them as automatically web-ready final assets.
 
@@ -99,16 +99,16 @@ Bad translation moves:
 
 App-side narrow spec:
 
-- `/Users/whatevertyler/N0te/docs/web-note-replica-spec.md`
+- `/Users/whatevertyler/n0te-app/docs/web-note-replica-spec.md`
 
 Source files:
 
-- `/Users/whatevertyler/N0te/Sources/N0te/UI/NoteView.swift`
-- `/Users/whatevertyler/N0te/Sources/N0te/UI/GlassSurface.swift`
-- `/Users/whatevertyler/N0te/Sources/N0te/UI/WindowIconButton.swift`
-- `/Users/whatevertyler/N0te/Sources/N0te/UI/ThemeToggle.swift`
-- `/Users/whatevertyler/N0te/Sources/N0te/UI/NativeNoteEditor.swift`
-- `/Users/whatevertyler/N0te/Sources/N0te/Models/WindowStyleConfiguration.swift`
+- `/Users/whatevertyler/n0te-app/Sources/N0te/UI/NoteView.swift`
+- `/Users/whatevertyler/n0te-app/Sources/N0te/UI/GlassSurface.swift`
+- `/Users/whatevertyler/n0te-app/Sources/N0te/UI/WindowIconButton.swift`
+- `/Users/whatevertyler/n0te-app/Sources/N0te/UI/ThemeToggle.swift`
+- `/Users/whatevertyler/n0te-app/Sources/N0te/UI/NativeNoteEditor.swift`
+- `/Users/whatevertyler/n0te-app/Sources/N0te/Models/WindowStyleConfiguration.swift`
 
 Replica constants:
 

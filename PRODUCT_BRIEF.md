@@ -1,6 +1,6 @@
 # N0te Product Brief
 
-Source repo: `/Users/whatevertyler/N0te`  
+Source repo: `/Users/whatevertyler/n0te-app`
 Last synced: `2026-04-22`  
 App commit: `d398de10466b8609357cb213b685ecb098afb4ba`
 

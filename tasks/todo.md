@@ -1,5 +1,97 @@
 # N0te Website Task Log
 
+## Vercel Production Deploy - 2026-04-27
+
+### Result
+- Deployed the current Contact modal + `/story` sandbox build to Vercel preview:
+  `https://n0te-website-khjrezz7t-pzfmd6k5qw-5867s-projects.vercel.app`
+- Deployed the same build to Vercel production:
+  `https://n0te-website-31t42kh7b-pzfmd6k5qw-5867s-projects.vercel.app`
+- Assigned the public Vercel domain to the production deployment:
+  `https://getn0te.vercel.app`
+
+### Verification
+- `./node_modules/.bin/tsc --noEmit`
+- `npm run build`
+- `git diff --check`
+- Preview `/` and `/story` returned `HTTP 200`.
+- Production `/` and `/story` returned `HTTP 200` on the production Vercel deployment URL.
+- `https://getn0te.vercel.app` returned `HTTP 200`.
+- `https://getn0te.vercel.app/story` returned `HTTP 200`.
+
+## Storytelling Sandbox Page - 2026-04-27
+
+### Plan
+- Add an isolated `/story` route for a scroll-driven N0te product narrative.
+- Keep the homepage and existing homepage sections unchanged.
+- Use the five planned `/story/frame-*.png` product image paths with graceful missing-image fallbacks.
+
+### Progress
+- [x] Created the App Router `/story` page with local back-home navigation, editorial intro copy, story section, and closing CTA.
+- [x] Added the `StoryScrollSection` client component with five story beats, sticky desktop visual swapping, stacked mobile layout, and reduced-motion-aware transitions.
+- [x] Reused the existing `DOWNLOAD_URL`, `Magnetic`, Framer Motion, theme tokens, and `next/image`.
+
+### Verification
+- `./node_modules/.bin/tsc --noEmit`
+- `npm run build`
+- `git diff --check`
+- `curl -I http://127.0.0.1:3000/story` returned `HTTP/1.1 200 OK` against the local dev server.
+- Rendered HTML includes `/story`, all five `/story/frame-*.png` references, the download link, and the back-home link.
+- Browser automation note: Playwright/Chromium is not installed in this repo, so visual desktop/mobile interaction checks still need a manual browser pass once the actual story images are added.
+
+### Result
+- `/story` is now available as an isolated storytelling sandbox route. The homepage route remains unchanged.
+
+## Footer Contact Modal - 2026-04-27
+
+### Plan
+- Replace the footer `Contact` mail link with an in-page contact modal.
+- Style the modal from N0te app chrome tokens, not the website CTA system.
+- Add copy-to-clipboard behavior for `tylermathewsuggs@gmail.com`.
+- Refine the modal into a non-blocking floating surface with no outer stroke, immediate blur, and magnetic app controls.
+
+### Progress
+- [x] Implemented the footer Contact trigger as a dialog-opening button.
+- [x] Added a small glass contact modal with close and copy controls.
+- [x] Added Clipboard API copy behavior with a fallback and copied/retry states.
+- [x] Added Escape, backdrop click, reduced-motion, body scroll lock, focus trap, and focus return handling.
+- [x] Removed the modal outer stroke.
+- [x] Removed scroll lock, backdrop dismissal, `aria-modal`, and the focus trap so the page remains scrollable behind the floating contact panel.
+- [x] Moved entrance motion to the inner content row so the blur-bearing shell mounts at full glass strength.
+- [x] Added existing `Magnetic` spring behavior plus hover/press feedback to the close and copy controls.
+- [x] Added a crisp 110ms ease-out close animation so dismissal feels immediate without hard-cutting.
+
+### Verification
+- `./node_modules/.bin/tsc --noEmit`
+- `npm run build`
+- `git diff --check`
+- `curl -I http://127.0.0.1:3000` returned `HTTP/1.1 200 OK` against the local dev server.
+- Re-ran `./node_modules/.bin/tsc --noEmit`, `npm run build`, and `git diff --check` after the non-blocking/magnetic refinement.
+- Re-ran `./node_modules/.bin/tsc --noEmit` and `git diff --check` after tightening the close animation.
+- Browser automation note: Python Playwright is not installed, and the temporary npm Playwright package/module path was not usable in this environment.
+
+### Result
+- Footer Contact now opens a compact N0te-style floating contact panel with Tyler's email, a copy control, no outer stroke, page scrolling behind it, immediate glass blur, magnetic close/copy controls, and a fast close transition.
+
+## Folder Rename - 2026-04-27
+
+### Plan
+- Rename the native app workspace from the old `N0te` folder to `/Users/whatevertyler/n0te-app`.
+- Update live path references in website docs, app docs, shared memory, helper skills, and Codex project config.
+- Verify that old absolute-path references are gone and the renamed app repo still builds.
+
+### Progress
+- [x] Confirmed the old `N0te` folder existed and `/Users/whatevertyler/n0te-app` did not.
+- [x] Renamed the folder to `/Users/whatevertyler/n0te-app`.
+- [x] Updated hardcoded references to `/Users/whatevertyler/n0te-app`.
+- [x] Verified old absolute-path references are gone from live project/config files.
+- [x] Ran app verification from the renamed folder.
+
+### Result
+- `/Users/whatevertyler/n0te-app` is now the native app workspace.
+- Website docs, app docs, helper skills, shared venture memory, and Codex project trust config now point at the renamed folder.
+- `swift build` initially exposed a stale SwiftPM module-cache path from the old folder; `swift package clean` cleared it, then `swift build` and `scripts/build-app.sh` passed.
+
 ## Plan
 - Mount and tune Lenis so smooth scrolling actually runs and respects reduced motion.
 - Tighten the highest-visibility motion moments: nav, hero, cards, and primary CTAs.
@@ -190,7 +282,7 @@
 - Re-ran `npm run build` after moving the footer into the constrained scenic container.
 - Re-ran `./node_modules/.bin/tsc --noEmit` after simplifying the footer structure and extracting the shared theme toggle.
 - Re-ran `npm run build` after simplifying the footer structure and extracting the shared theme toggle.
-- Built the native app with `/Users/whatevertyler/N0te/scripts/build-app.sh` and packaged `/tmp/N0te.zip` for public download.
+- Built the native app with `/Users/whatevertyler/n0te-app/scripts/build-app.sh` and packaged `/tmp/N0te.zip` for public download.
 - Published `https://github.com/wwwhatevertyler/n0te-releases/releases/tag/v0.1.0-beta.1` with the `N0te.zip` release asset.
 - Re-ran `./node_modules/.bin/tsc --noEmit` after removing SmoothScroll and swapping the website to the public GitHub Release download URL.
 - Re-ran `npm run build` after removing SmoothScroll and swapping the website to the public GitHub Release download URL.
@@ -203,7 +295,7 @@
 - Redundant messaging clusters are documented in the final handoff for content cleanup decisions.
 - Obsidian Markdown preview card was restyled to match the quieter Finder-style card treatment.
 - Hero badge restored to Free + Obsidian copy, hard-coded purple accents moved to shared system-accent tokens, and the hero note preview was rebuilt against native app metrics.
-- Native app replica spec now exists at `/Users/whatevertyler/N0te/docs/web-note-replica-spec.md`; website summary points to it from `VISUAL_REFERENCE.md`.
+- Native app replica spec now exists at `/Users/whatevertyler/n0te-app/docs/web-note-replica-spec.md`; website summary points to it from `VISUAL_REFERENCE.md`.
 - Hero note light/dark toggle now controls the website theme instantly and remembers the selected mode.
 - Hero shader keeps its bright stop while using lifted charcoal tones in dark mode and warm material tones in light mode.
 - Nav download CTA now carries a quiet Apple platform cue without changing the label.

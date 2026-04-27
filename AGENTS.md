@@ -4,7 +4,7 @@ This repo is the website workspace for N0te. It is a separate project from the n
 
 ## Project Separation
 
-- `/Users/whatevertyler/N0te` = native app source of truth
+- `/Users/whatevertyler/n0te-app` = native app source of truth
 - `/Users/whatevertyler/n0te-website` = website source of truth
 
 Do not mix app implementation context into website work unless the website task explicitly needs it.
@@ -23,16 +23,16 @@ Only go into the app repo when the website docs are missing something important.
 
 When the website needs upstream product truth, prefer these app-side sources in this order:
 
-1. `/Users/whatevertyler/N0te/DESIGN.md`
-2. `/Users/whatevertyler/N0te/tasks/todo.md`
-3. `/Users/whatevertyler/N0te/docs/N0te-master-strategy.md`
+1. `/Users/whatevertyler/n0te-app/DESIGN.md`
+2. `/Users/whatevertyler/n0te-app/tasks/todo.md`
+3. `/Users/whatevertyler/n0te-app/docs/N0te-master-strategy.md`
 
 Do not use Swift/AppKit source as the primary input for website messaging unless a website claim depends on verifying an implementation detail.
 
 Do not import or mirror:
 
-- `/Users/whatevertyler/N0te/tasks/lessons.md`
-- `/Users/whatevertyler/N0te/tasks/handoff-new-chat.md`
+- `/Users/whatevertyler/n0te-app/tasks/lessons.md`
+- `/Users/whatevertyler/n0te-app/tasks/handoff-new-chat.md`
 - app verification commands
 - app architecture rules unless a web page or demo specifically depends on them
 

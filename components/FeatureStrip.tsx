@@ -32,7 +32,7 @@ const slideRight = {
 
 export default function StayInFlow() {
   return (
-    <section id="flow" className="relative py-28 px-6">
+    <section id="flow" className="relative px-6 pb-0 pt-28">
       {/* Ambient glow behind the "With N0te" card */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
         <div

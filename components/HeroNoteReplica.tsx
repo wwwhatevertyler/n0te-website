@@ -161,8 +161,8 @@ export default function HeroNoteReplica({
               </ChromeButton>
             </div>
 
-            <div className="absolute left-1/2 top-0 -translate-x-1/2 scale-[0.96] opacity-0 transition duration-150 ease-[var(--ease-out)] group-hover:scale-100 group-hover:opacity-100 focus-within:scale-100 focus-within:opacity-100">
-              <SiteThemeToggle variant="note" />
+            <div className="note-theme-toggle-reveal absolute left-1/2 top-0">
+              <SiteThemeToggle variant="note" className="note-theme-toggle-button" />
             </div>
 
             <div className="absolute right-0 top-0 flex" style={{ gap: 8 }}>

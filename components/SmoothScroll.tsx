@@ -15,12 +15,12 @@ function SmoothScrollRoot({ children }: { children: ReactNode }) {
 
     const lenis = new Lenis({
       autoRaf: true,
-      lerp: 0.16,
+      lerp: 0.1,
       smoothWheel: true,
-      wheelMultiplier: 0.82,
+      wheelMultiplier: 1.1,
       overscroll: false,
       virtualScroll: (event) => {
-        const maxDelta = 140;
+        const maxDelta = 180;
         const deltaY = event.deltaY;
 
         if (Math.abs(deltaY) > maxDelta) {

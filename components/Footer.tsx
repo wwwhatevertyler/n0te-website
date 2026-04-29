@@ -1,6 +1,12 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import Image from "next/image";
 import {
   type CSSProperties,
@@ -17,6 +23,7 @@ import { EASE_OUT, EASE_OUT_SOFT, PRESS_TRANSITION } from "@/lib/motion";
 
 const CONTACT_EMAIL = "tylermathewsuggs@gmail.com";
 const CONTACT_EXIT_TRANSITION = { duration: 0.11, ease: EASE_OUT } as const;
+const FOOTER_SCROLL_SCALE_MAX = 1.055;
 
 const contactModalStyle: CSSProperties = {
   width: "min(356px, calc(100vw - 40px))",
@@ -277,6 +284,14 @@ export default function Footer() {
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [shouldRestoreFocus, setShouldRestoreFocus] = useState(false);
   const contactTriggerRef = useRef<HTMLButtonElement>(null);
+  const footerRef = useRef<HTMLElement>(null);
+  const shouldReduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: footerRef,
+    offset: ["start 92%", "end end"],
+  });
+  const scrollScale = useTransform(scrollYProgress, [0, 1], [1, FOOTER_SCROLL_SCALE_MAX]);
+  const bgScale = shouldReduceMotion ? 1 : scrollScale;
 
   const openContactModal = useCallback(() => {
     setIsContactOpen(true);
@@ -304,6 +319,7 @@ export default function Footer() {
 
   return (
     <footer
+      ref={footerRef}
       data-footer-dock
       className="footer-stage relative px-6 pb-[120px] sm:px-8 sm:pb-[120px] lg:px-10 lg:pb-[120px]"
     >
@@ -317,15 +333,20 @@ export default function Footer() {
           }}
         >
           <div className="absolute inset-0 z-0">
-            <Image
-              src="/images/n0te-landscape-waterfall.jpg"
-              alt="Mountain landscape with waterfall"
-              fill
-              priority={false}
-              sizes="(min-width: 1280px) 1088px, calc(100vw - 64px)"
-              className="object-cover"
-              style={{ objectPosition: "50% 54%" }}
-            />
+            <motion.div
+              className="absolute inset-0"
+              style={{ scale: bgScale }}
+            >
+              <Image
+                src="/images/n0te-landscape-waterfall.jpg"
+                alt="Mountain landscape with waterfall"
+                fill
+                priority={false}
+                sizes="(min-width: 1280px) 1088px, calc(100vw - 64px)"
+                className="object-cover"
+                style={{ objectPosition: "50% 54%" }}
+              />
+            </motion.div>
             <div
               className="absolute inset-0"
               style={{

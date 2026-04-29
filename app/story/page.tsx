@@ -21,8 +21,8 @@ export default function StoryPage() {
         aria-hidden="true"
       />
 
-      <header className="relative px-6 pb-20 pt-7 sm:px-8 sm:pb-24 lg:px-10">
-        <div className="mx-auto max-w-[74rem]">
+      <header className="relative px-6 pb-14 pt-7 sm:px-8 sm:pb-16 lg:px-10">
+        <div className="mx-auto max-w-5xl">
           <nav aria-label="Story page navigation" className="flex items-center justify-between">
             <Link
               href="/"
@@ -44,7 +44,7 @@ export default function StoryPage() {
             </p>
           </nav>
 
-          <div className="relative pt-24 sm:pt-32 lg:pt-36">
+          <div className="relative pt-16 sm:pt-20 lg:pt-24">
             <div
               className="pointer-events-none absolute -left-12 top-16 h-24 w-24 rounded-full opacity-70 blur-3xl"
               style={{
@@ -53,14 +53,14 @@ export default function StoryPage() {
               aria-hidden="true"
             />
 
-            <div className="max-w-5xl">
-              <p className="font-jura text-[12px] font-semibold tracking-[0.18em] text-muted">
+            <div className="max-w-4xl">
+              <p className="font-jura text-[11px] font-medium uppercase tracking-widest text-muted">
                 Product story
               </p>
-              <h1 className="mt-6 max-w-5xl text-[clamp(3.2rem,9.2vw,8.9rem)] font-semibold leading-[0.88] tracking-normal text-fg">
+              <h1 className="mt-5 max-w-4xl font-jura text-[clamp(2.7rem,6.2vw,4.5rem)] font-semibold leading-[1.04] tracking-tight text-fg">
                 Capture the thought before your system asks where it belongs.
               </h1>
-              <p className="mt-8 max-w-2xl text-[16px] leading-7 text-muted sm:text-[18px] sm:leading-8">
+              <p className="mt-6 max-w-xl text-[15px] leading-7 text-muted sm:text-[16px]">
                 N0te gives you a floating place to catch the raw thing first — then send it to
                 Obsidian when it is ready to become part of your vault.
               </p>

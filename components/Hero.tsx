@@ -52,7 +52,6 @@ export default function Hero() {
             className="w-1.5 h-1.5 rounded-full shrink-0"
             style={{
               background: "var(--n0te-accent)",
-              boxShadow: "0 0 14px color-mix(in srgb, var(--n0te-accent) 42%, transparent)",
             }}
           />
           Free for Mac · Markdown to Obsidian

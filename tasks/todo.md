@@ -1,5 +1,83 @@
 # N0te Website Task Log
 
+## Footer Image Scroll Zoom - 2026-04-28
+
+### Result
+- Removed the experimental bottom overscroll pressure behavior from `components/Footer.tsx`.
+- Replaced the footer wheel/touch listeners with the same scroll-linked image scale pattern used by `LandscapeNoteSection`.
+- Footer background image now uses a one-way `1 → 1.055` scroll scale and stays zoomed at the page bottom.
+- Reduced-motion users get a static footer image at `scale(1)`.
+- Footer content, links, theme toggle, and Contact modal are unchanged.
+
+### Verification
+- `./node_modules/.bin/tsc --noEmit`
+- `npm run build`
+- `git diff --check`
+- Headless Chromium footer scroll check verified scale starts at `1`, reaches about `1.03` mid-footer, reaches `1.055` at page bottom, and stays `1.055` after bottom wheel input.
+- Headless Chromium reduced-motion check verified footer image scale remains `1` at page bottom.
+- Headless Chromium Contact check verified the footer dialog still opens.
+
+## Homepage Story Section Integration - 2026-04-27
+
+### Result
+- Added the existing `StoryScrollSection` to the homepage after the "Every switch costs a thought." section.
+- Reused only the scroll story component, without adding the `/story` page header, local nav, intro, or closing CTA to the homepage.
+- Added a homepage-style divider directly below the hero so the hero has a clean structural endpoint before the problem section starts.
+- Added a generous equal-spaced divider between the problem section and the story scroll section by moving the problem section bottom spacing into a dedicated divider band.
+- Added a homepage-style divider below the story section, letting the story bottom padding and the next section top padding preserve the same section rhythm as the rest of the page.
+- Tightened the homepage story ending with a compact sticky positioning variant so the divider sits closer to the final story frame instead of leaving a full viewport-center gap above it.
+- Replaced the story screenshots with the new `public/images for website` retina exports and set the desktop frame to `528px × 395px`, half of their `1056px × 790px` source size.
+
+### Verification
+- `./node_modules/.bin/tsc --noEmit`
+- `npm run build`
+- `git diff --check`
+- Source order check confirmed `Hero` renders before the new hero divider, `StayInFlow`, the spaced `StoryScrollSection`, the story divider, and `FeatureGrid`.
+- Source and built HTML checks confirmed the story image paths use `public/images for website` and the desktop frame uses `33rem` / `528px` visual width.
+- Local browser routes `/` and `/story` were opened against the dev server and returned `200`.
+- Automated desktop/mobile Playwright smoke checks were attempted but unavailable because `playwright` is not installed in this repo.
+
+## Story Page Scale Refinement - 2026-04-27
+
+### Result
+- Tightened `/story` page typography and spacing to better match the homepage system.
+- Reduced the story hero, step headings, scroll rhythm, screenshot frame scale, glow, and closing CTA size.
+- Kept body copy in the site sans and used Jura for story headings, labels, indicators, and CTA heading.
+- Removed the sticky screenshot fade/blur transition so active story frames swap instantly.
+- Reduced the desktop screenshot panel to `29.5rem` max width, which still stays well under the 784px 2x retina limit for 1568px source frames.
+- Flattened the story screenshots by removing their outer stroke, shadow, and sheen overlay; reduced the desktop panel another 8% to `27.15rem`.
+- Removed the remaining decorative glow layers behind and below the sticky story screenshot.
+- Added React preload hints plus decode handling for all five story screenshots and kept the previous sticky frame visible until the next frame is ready.
+- Switched story screenshots to unoptimized local image delivery so the preloaded `/story/frame-*.png` URLs are the same URLs used by the visible frames.
+
+### Verification
+- `./node_modules/.bin/tsc --noEmit`
+- `npm run build`
+- `git diff --check`
+
+## Story Screenshots - 2026-04-27
+
+### Result
+- Added the five original product screenshots at `/story/frame-1.png` through `/story/frame-5.png`.
+- Updated the story frame display to use the screenshots' native aspect ratio without placeholder-style padding.
+
+### Verification
+- `./node_modules/.bin/tsc --noEmit`
+- `npm run build`
+- `git diff --check`
+
+## Mobile Note Theme Toggle - 2026-04-27
+
+### Result
+- Made the shared note preview theme toggle visible by default on touch-first devices.
+- Preserved desktop hover/focus reveal behavior for the hero and landscape note previews.
+- Disabled pointer events while the desktop toggle is hidden so invisible controls do not catch stray taps.
+
+### Verification
+- `./node_modules/.bin/tsc --noEmit`
+- `npm run build`
+- `git diff --check`
+
 ## Vercel Production Deploy - 2026-04-27
 
 ### Result

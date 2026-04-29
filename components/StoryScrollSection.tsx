@@ -1,8 +1,9 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { preload } from "react-dom";
 import Magnetic from "@/components/Magnetic";
 import { DOWNLOAD_URL } from "@/lib/download";
 import { EASE_OUT_SOFT, PRESS_TRANSITION } from "@/lib/motion";
@@ -23,7 +24,7 @@ const STORY_STEPS: StoryStep[] = [
     title: "Start with the thought.",
     body:
       "The note is already there, hovering above your work. No new app, no file picker, no deciding where this belongs yet. Just catch the sentence before it softens.",
-    imageSrc: "/story/frame-1.png",
+    imageSrc: "/images%20for%20website/Frame%2021.png",
     imageAlt: "N0te floating note in its idle capture state.",
   },
   {
@@ -32,7 +33,7 @@ const STORY_STEPS: StoryStep[] = [
     title: "Speak when typing would slow you down.",
     body:
       "Hit the mic and keep moving. N0te listens while the idea is still forming, turning quick spoken fragments into text without pulling you into a different workspace.",
-    imageSrc: "/story/frame-2.png",
+    imageSrc: "/images%20for%20website/Frame%2026.png",
     imageAlt: "N0te listening in voice dictation mode.",
   },
   {
@@ -41,7 +42,7 @@ const STORY_STEPS: StoryStep[] = [
     title: "Drop in the thing that explains it.",
     body:
       "Screenshots, references, visual scraps, and UI details can stay with the thought. Add context without turning a quick note into a whole filing ritual.",
-    imageSrc: "/story/frame-3.png",
+    imageSrc: "/images%20for%20website/Frame%2027.png",
     imageAlt: "N0te with an image or screenshot attachment being added.",
   },
   {
@@ -50,7 +51,7 @@ const STORY_STEPS: StoryStep[] = [
     title: "Send it where your memory lives.",
     body:
       "When the fragment is worth keeping, send it to Obsidian as clean Markdown. No cloud handoff, no second inbox, no reformatting later.",
-    imageSrc: "/story/frame-4.png",
+    imageSrc: "/images%20for%20website/Frame%2028.png",
     imageAlt: "N0te sending a captured note to Obsidian.",
   },
   {
@@ -59,10 +60,21 @@ const STORY_STEPS: StoryStep[] = [
     title: "Then get back to the work.",
     body:
       "The capture layer fades back into the background. Your note, image, and context are saved locally, ready for your vault — while you stay in flow.",
-    imageSrc: "/story/frame-5.png",
+    imageSrc: "/images%20for%20website/Frame%2029.png",
     imageAlt: "N0te showing a calm captured note with an image attachment.",
   },
 ];
+
+const STORY_IMAGE_SIZES = "(min-width: 1024px) 528px, calc(100vw - 48px)";
+
+function preloadStoryFrames() {
+  STORY_STEPS.forEach((step, index) => {
+    preload(step.imageSrc, {
+      as: "image",
+      fetchPriority: index === 0 ? "high" : "auto",
+    });
+  });
+}
 
 function AppleMark() {
   return (
@@ -95,34 +107,25 @@ function MissingFrame({ step }: { step: StoryStep }) {
 function ProductFrame({
   step,
   failed,
+  onImageLoad,
   onImageError,
   priority = false,
 }: {
   step: StoryStep;
   failed: boolean;
+  onImageLoad: (id: string) => void;
   onImageError: (id: string) => void;
   priority?: boolean;
 }) {
   return (
     <figure className="relative m-0">
       <div
-        className="relative overflow-hidden rounded-[1.75rem] sm:rounded-[2.25rem]"
+        className="relative overflow-hidden rounded-[18px]"
         style={{
-          aspectRatio: "1.48 / 1",
-          background: "var(--note-surface)",
-          backdropFilter: "blur(40px) saturate(1.65)",
-          WebkitBackdropFilter: "blur(40px) saturate(1.65)",
-          border: "1px solid color-mix(in srgb, var(--theme-ink) 13%, transparent)",
-          boxShadow:
-            "0 34px 90px rgba(0,0,0,0.32), inset 0 1px 0 color-mix(in srgb, var(--theme-ink) 12%, transparent), inset 0 -1px 0 rgba(0,0,0,0.16)",
+          aspectRatio: "1056 / 790",
+          background: "transparent",
         }}
       >
-        <div
-          className="pointer-events-none absolute inset-0 z-10"
-          style={{ background: "var(--note-sheen)" }}
-          aria-hidden="true"
-        />
-
         {failed ? (
           <MissingFrame step={step} />
         ) : (
@@ -131,8 +134,10 @@ function ProductFrame({
             alt={step.imageAlt}
             fill
             priority={priority}
-            sizes="(min-width: 1024px) 560px, calc(100vw - 48px)"
-            className="object-contain p-5 sm:p-7"
+            unoptimized
+            sizes={STORY_IMAGE_SIZES}
+            className="object-cover"
+            onLoad={() => onImageLoad(step.id)}
             onError={() => onImageError(step.id)}
           />
         )}
@@ -141,22 +146,38 @@ function ProductFrame({
   );
 }
 
-export default function StoryScrollSection() {
+export default function StoryScrollSection({ compactEnd = false }: { compactEnd?: boolean }) {
+  preloadStoryFrames();
+
   const shouldReduceMotion = useReducedMotion();
   const stepRefs = useRef<(HTMLElement | null)[]>([]);
   const [activeId, setActiveId] = useState(STORY_STEPS[0].id);
+  const [displayedId, setDisplayedId] = useState(STORY_STEPS[0].id);
+  const [loadedImageIds, setLoadedImageIds] = useState<Set<string>>(() => new Set());
   const [failedImageIds, setFailedImageIds] = useState<Set<string>>(() => new Set());
 
-  const activeIndex = Math.max(
-    STORY_STEPS.findIndex((step) => step.id === activeId),
+  const displayedIndex = Math.max(
+    STORY_STEPS.findIndex((step) => step.id === displayedId),
     0,
   );
-  const activeStep = STORY_STEPS[activeIndex];
+  const displayedStep = STORY_STEPS[displayedIndex];
 
   const activeStepLabel = useMemo(
-    () => `${String(activeIndex + 1).padStart(2, "0")} / ${String(STORY_STEPS.length).padStart(2, "0")}`,
-    [activeIndex],
+    () => `${String(displayedIndex + 1).padStart(2, "0")} / ${String(STORY_STEPS.length).padStart(2, "0")}`,
+    [displayedIndex],
   );
+
+  const handleImageLoad = useCallback((id: string) => {
+    setLoadedImageIds((current) => {
+      if (current.has(id)) {
+        return current;
+      }
+
+      const next = new Set(current);
+      next.add(id);
+      return next;
+    });
+  }, []);
 
   const handleImageError = useCallback((id: string) => {
     setFailedImageIds((current) => {
@@ -169,6 +190,62 @@ export default function StoryScrollSection() {
       return next;
     });
   }, []);
+
+  useEffect(() => {
+    let isMounted = true;
+    const preloaders = STORY_STEPS.map((step) => {
+      const image = new window.Image();
+      image.decoding = "async";
+      image.onload = () => {
+        const decode = image.decode?.();
+
+        if (decode) {
+          void decode.then(
+            () => {
+              if (isMounted) {
+                handleImageLoad(step.id);
+              }
+            },
+            () => {
+              if (isMounted) {
+                handleImageLoad(step.id);
+              }
+            },
+          );
+          return;
+        }
+
+        if (isMounted) {
+          handleImageLoad(step.id);
+        }
+      };
+      image.onerror = () => {
+        if (isMounted) {
+          handleImageError(step.id);
+        }
+      };
+      image.src = step.imageSrc;
+      return image;
+    });
+
+    return () => {
+      isMounted = false;
+      preloaders.forEach((image) => {
+        image.onload = null;
+        image.onerror = null;
+      });
+    };
+  }, [handleImageError, handleImageLoad]);
+
+  useEffect(() => {
+    if (
+      activeId === STORY_STEPS[0].id ||
+      loadedImageIds.has(activeId) ||
+      failedImageIds.has(activeId)
+    ) {
+      setDisplayedId(activeId);
+    }
+  }, [activeId, failedImageIds, loadedImageIds]);
 
   useEffect(() => {
     const nodes = stepRefs.current.filter(Boolean) as HTMLElement[];
@@ -226,66 +303,35 @@ export default function StoryScrollSection() {
     };
   }, []);
 
-  const frameMotion = shouldReduceMotion
-    ? {
-        initial: { opacity: 0 },
-        animate: { opacity: 1 },
-        exit: { opacity: 0 },
-      }
-    : {
-        initial: { opacity: 0, scale: 0.982, filter: "blur(10px)" },
-        animate: { opacity: 1, scale: 1, filter: "blur(0px)" },
-        exit: { opacity: 0, scale: 1.012, filter: "blur(8px)" },
-      };
-
   return (
-    <section aria-label="N0te product story" className="relative px-6 pb-28 sm:px-8 lg:px-10">
-      <div className="mx-auto max-w-[74rem]">
-        <div className="hidden gap-16 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(390px,0.82fr)] xl:gap-20">
+    <section aria-label="N0te product story" className="relative px-6 pb-24 sm:px-8 lg:px-10">
+      <div className="mx-auto max-w-[68rem]">
+        <div className="hidden gap-12 lg:grid lg:grid-cols-[minmax(0,33rem)_minmax(360px,1fr)] xl:gap-16">
           <div className="relative">
-            <div className="sticky top-12 flex min-h-screen items-center">
-              <div className="relative w-full">
-                <div
-                  className="pointer-events-none absolute -inset-16 rounded-full opacity-70 blur-3xl"
-                  style={{
-                    background:
-                      "radial-gradient(circle at 45% 45%, color-mix(in srgb, var(--n0te-accent) 18%, transparent), transparent 62%)",
-                  }}
-                  aria-hidden="true"
-                />
-                <div
-                  className="pointer-events-none absolute inset-x-10 -bottom-10 h-24 rounded-full opacity-55 blur-2xl"
-                  style={{
-                    background:
-                      "color-mix(in srgb, var(--theme-ink) 12%, transparent)",
-                  }}
-                  aria-hidden="true"
-                />
-
+            <div
+              className={
+                compactEnd
+                  ? "sticky top-[calc(50svh-13rem)] flex items-center"
+                  : "sticky top-12 flex min-h-screen items-center"
+              }
+            >
+              <div className="relative w-full max-w-[33rem]">
                 <div className="relative">
-                  <AnimatePresence mode="wait" initial={false}>
-                    <motion.div
-                      key={activeStep.id}
-                      {...frameMotion}
-                      transition={{ duration: shouldReduceMotion ? 0 : 0.32, ease: EASE_OUT_SOFT }}
-                      className="relative"
-                      style={{ willChange: shouldReduceMotion ? "auto" : "opacity, transform, filter" }}
-                    >
-                      <ProductFrame
-                        step={activeStep}
-                        failed={failedImageIds.has(activeStep.id)}
-                        onImageError={handleImageError}
-                        priority={activeIndex === 0}
-                      />
-                    </motion.div>
-                  </AnimatePresence>
+                  <ProductFrame
+                    key={displayedStep.id}
+                    step={displayedStep}
+                    failed={failedImageIds.has(displayedStep.id)}
+                    onImageLoad={handleImageLoad}
+                    onImageError={handleImageError}
+                    priority={displayedIndex === 0}
+                  />
 
-                  <div className="mt-6 flex items-center justify-between px-2">
-                    <p className="font-jura text-[12px] font-semibold tracking-[0.16em] text-fg/55">
+                  <div className="mt-4 flex items-center justify-between px-1">
+                    <p className="font-jura text-[11px] font-semibold tracking-[0.16em] text-fg/55">
                       {activeStepLabel}
                     </p>
-                    <p className="max-w-[18rem] truncate text-right text-[12px] text-muted">
-                      {activeStep.kicker}
+                    <p className="max-w-[16rem] truncate text-right font-jura text-[11px] font-medium uppercase tracking-widest text-muted">
+                      {displayedStep.kicker}
                     </p>
                   </div>
                 </div>
@@ -293,7 +339,7 @@ export default function StoryScrollSection() {
             </div>
           </div>
 
-          <div className="py-[22vh]">
+          <div className="py-[16vh]">
             {STORY_STEPS.map((step, index) => {
               const isActive = step.id === activeId;
 
@@ -305,7 +351,7 @@ export default function StoryScrollSection() {
                   }}
                   data-story-id={step.id}
                   aria-current={isActive ? "step" : undefined}
-                  className="flex min-h-[74vh] items-center"
+                  className="flex min-h-[62vh] items-center"
                 >
                   <motion.div
                     animate={{
@@ -315,13 +361,15 @@ export default function StoryScrollSection() {
                     transition={{ duration: shouldReduceMotion ? 0 : 0.24, ease: EASE_OUT_SOFT }}
                     className="max-w-[31rem]"
                   >
-                    <p className="font-jura text-[12px] font-semibold tracking-[0.18em] text-muted">
+                    <p className="font-jura text-[11px] font-medium uppercase tracking-widest text-muted">
                       {String(index + 1).padStart(2, "0")} / {step.kicker}
                     </p>
-                    <h2 className="mt-4 text-[clamp(2.25rem,4.8vw,4.8rem)] font-semibold leading-[0.95] tracking-normal text-fg">
+                    <h2 className="mt-4 font-jura text-[42px] font-semibold leading-[1.08] tracking-tight text-fg">
                       {step.title}
                     </h2>
-                    <p className="mt-7 max-w-[34rem] text-[16px] leading-7 text-muted">{step.body}</p>
+                    <p className="mt-5 max-w-[30rem] text-[15px] leading-7 text-muted">
+                      {step.body}
+                    </p>
                   </motion.div>
                 </article>
               );
@@ -329,23 +377,24 @@ export default function StoryScrollSection() {
           </div>
         </div>
 
-        <div className="space-y-20 lg:hidden">
+        <div className="space-y-16 lg:hidden">
           {STORY_STEPS.map((step, index) => (
-            <article key={step.id} className="grid gap-7">
+            <article key={step.id} className="grid gap-5">
               <ProductFrame
                 step={step}
                 failed={failedImageIds.has(step.id)}
+                onImageLoad={handleImageLoad}
                 onImageError={handleImageError}
                 priority={index === 0}
               />
               <div>
-                <p className="font-jura text-[12px] font-semibold tracking-[0.18em] text-muted">
+                <p className="font-jura text-[11px] font-medium uppercase tracking-widest text-muted">
                   {String(index + 1).padStart(2, "0")} / {step.kicker}
                 </p>
-                <h2 className="mt-3 text-[clamp(2rem,12vw,3.5rem)] font-semibold leading-[0.98] tracking-normal text-fg">
+                <h2 className="mt-3 font-jura text-[34px] font-semibold leading-[1.08] tracking-tight text-fg">
                   {step.title}
                 </h2>
-                <p className="mt-5 text-[15px] leading-7 text-muted">{step.body}</p>
+                <p className="mt-4 text-[15px] leading-7 text-muted">{step.body}</p>
               </div>
             </article>
           ))}
@@ -359,8 +408,8 @@ export function StoryClosingCTA() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section className="relative px-6 pb-36 pt-4 sm:px-8 lg:px-10">
-      <div className="mx-auto max-w-[74rem]">
+    <section className="relative px-6 pb-28 pt-0 sm:px-8 lg:px-10">
+      <div className="mx-auto max-w-5xl">
         <div
           className="h-px"
           style={{
@@ -374,20 +423,20 @@ export function StoryClosingCTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-120px" }}
           transition={{ duration: shouldReduceMotion ? 0 : 0.5, ease: EASE_OUT_SOFT }}
-          className="mx-auto flex max-w-2xl flex-col items-center pt-24 text-center"
+          className="mx-auto flex max-w-xl flex-col items-center pt-20 text-center"
         >
-          <p className="font-jura text-[12px] font-semibold tracking-[0.18em] text-muted">
+          <p className="font-jura text-[11px] font-medium uppercase tracking-widest text-muted">
             FINAL STATE
           </p>
-          <h2 className="mt-5 text-[clamp(2.25rem,6vw,5.25rem)] font-semibold leading-[0.95] tracking-normal text-fg">
+          <h2 className="mt-5 font-jura text-[36px] font-semibold leading-[1.08] tracking-tight text-fg sm:text-[46px]">
             Built for the moment before structure.
           </h2>
-          <p className="mt-7 max-w-md text-[15px] leading-7 text-muted">
+          <p className="mt-5 max-w-md text-[15px] leading-7 text-muted">
             N0te is not another place to manage your notes. It is the quiet capture layer before
             Obsidian.
           </p>
 
-          <div className="mt-9 flex flex-col items-center gap-3 sm:flex-row">
+          <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row">
             <Magnetic>
               <motion.a
                 href={DOWNLOAD_URL}
